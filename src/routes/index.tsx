@@ -1,10 +1,10 @@
 import { createBrowserRouter } from "react-router-dom";
-import { LoginScreen } from "../views/Login";
+import { InitialScreen } from "../views/initialScreen";
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <LoginScreen />,
+    element: <InitialScreen />,
   },
   {
     path: "/login",

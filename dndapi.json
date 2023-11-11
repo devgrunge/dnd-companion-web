@@ -1,0 +1,499 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2023-11-11T19:14:36.041Z",
+  "__export_source": "insomnia.desktop.app:v2023.5.8",
+  "resources": [
+    {
+      "_id": "req_eeaaeabda0c64c049e303bba3f6f4757",
+      "parentId": "wrk_d4b15675ab3f410a8ab4db3bbce8d8f1",
+      "modified": 1699726321124,
+      "created": 1699559961751,
+      "url": "http://localhost:3333/rooms/zV54",
+      "name": "Get room",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "User-Agent",
+          "value": "insomnia/2023.5.8"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVhMmUyYjI0LWNiZDYtNDdiZS04ZWYwLWYzMDc0MDEzODkyMSIsImVtYWlsIjoidGVzdGVAZ21haWwiLCJpYXQiOjE2OTkzMDAzNzgsImV4cCI6MTczMDgzNjM3OH0.mJZ0sy9k8AWCS4FHCxp6yEKB3LMahtfmGYiKynZ2EjY"
+      },
+      "metaSortKey": -1699559961751,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "wrk_d4b15675ab3f410a8ab4db3bbce8d8f1",
+      "parentId": null,
+      "modified": 1699730043042,
+      "created": 1652377005412,
+      "name": "Dnd companion API",
+      "description": "",
+      "scope": "collection",
+      "_type": "workspace"
+    },
+    {
+      "_id": "req_b96ea495086d4b3783c59753eb6ba968",
+      "parentId": "wrk_d4b15675ab3f410a8ab4db3bbce8d8f1",
+      "modified": 1699387274381,
+      "created": 1699306990532,
+      "url": "http://localhost:3333/players/4f59ca5d-721b-4af9-bd36-fa84094003b9",
+      "name": "Get Dms",
+      "description": "",
+      "method": "GET",
+      "body": {
+        "mimeType": "application/json",
+        "text": ""
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "User-Agent",
+          "value": "insomnia/2023.5.8"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVhMmUyYjI0LWNiZDYtNDdiZS04ZWYwLWYzMDc0MDEzODkyMSIsImVtYWlsIjoidGVzdGVAZ21haWwiLCJpYXQiOjE2OTkzMDAzNzgsImV4cCI6MTczMDgzNjM3OH0.mJZ0sy9k8AWCS4FHCxp6yEKB3LMahtfmGYiKynZ2EjY"
+      },
+      "metaSortKey": -1699306990532,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_2cf6f610055241b8a3348d3fd3d7955e",
+      "parentId": "wrk_d4b15675ab3f410a8ab4db3bbce8d8f1",
+      "modified": 1699478796345,
+      "created": 1652380575969,
+      "url": "http://localhost:3333/characters",
+      "name": "GET Character",
+      "description": "",
+      "method": "GET",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"name\": \"andre teste\",\n\t\"email\": \"andre@test.com\",\n\t\"password\": \"testelogin\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_bda7870e5aa74b3680d294bf375dac5c"
+        },
+        {
+          "id": "pair_cbb2ddbe6f5c4040b907f110a391ccc3",
+          "name": "",
+          "value": "",
+          "description": ""
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVhMmUyYjI0LWNiZDYtNDdiZS04ZWYwLWYzMDc0MDEzODkyMSIsImVtYWlsIjoidGVzdGVAZ21haWwiLCJpYXQiOjE2OTg2OTc5MDYsImV4cCI6MTczMDIzMzkwNn0.lVHFIJK51UEqBWVGVwziC0j6_AykHwGR2TcU5yCXoXg"
+      },
+      "metaSortKey": -1699303657562.5,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_ce7f5253d4bc448fb7313a1ac29503ad",
+      "parentId": "wrk_d4b15675ab3f410a8ab4db3bbce8d8f1",
+      "modified": 1699478799814,
+      "created": 1699300324593,
+      "url": "http://localhost:3333/login",
+      "name": "Login",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"email\" : \"teste@gmail\",\n\t\"password\" : \"123\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "User-Agent",
+          "value": "insomnia/2023.5.8"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1652296024467.125,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_735ea21531ec4c84ab2e0f21d8e4d243",
+      "parentId": "wrk_d4b15675ab3f410a8ab4db3bbce8d8f1",
+      "modified": 1699559246792,
+      "created": 1699478761872,
+      "url": "http://localhost:3333/characters",
+      "name": "Create Character",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"neferion\",\n  \"level\": 1,\n \"class\": \"warlock\",\n    \"attributes\": {\n     \"str\": 12,\n     \"dex\": 10,\n     \"con\": 10,\n     \"int\": 10,\n     \"wis\": 10,\n     \"car\": 17\n          },\n \"hitpoints\": 12,\n \"armor_class\": 13,\n\t\"initiative\" : 0\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_a5bfc25c0ffa437883333c48520a5730"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVhMmUyYjI0LWNiZDYtNDdiZS04ZWYwLWYzMDc0MDEzODkyMSIsImVtYWlsIjoidGVzdGVAZ21haWwiLCJpYXQiOjE2OTg2OTc5MDYsImV4cCI6MTczMDIzMzkwNn0.lVHFIJK51UEqBWVGVwziC0j6_AykHwGR2TcU5yCXoXg",
+        "disabled": false
+      },
+      "metaSortKey": -1652210985720.25,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_3cc495cc6b6b41198c5125993fc3630a",
+      "parentId": "wrk_d4b15675ab3f410a8ab4db3bbce8d8f1",
+      "modified": 1699726189510,
+      "created": 1672078310990,
+      "url": "http://localhost:3333/rooms",
+      "name": "Create/ Update Room",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n \"room_name\" : \"battle companion\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_bda7870e5aa74b3680d294bf375dac5c"
+        },
+        {
+          "id": "pair_cbb2ddbe6f5c4040b907f110a391ccc3",
+          "name": "",
+          "value": "",
+          "description": ""
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjkwOTEyNjIxLWZjZGQtNDEyNC04OGRjLTQyMTQ3NTllYmFmNCIsImVtYWlsIjoiYWxleHRlc3RlIiwiaWF0IjoxNjk5MjAyOTkwLCJleHAiOjE3MzA3Mzg5OTB9.IM6IlwPhD4n-iXOEbUYfG2CqUE4IAznlfYIMG6PtraM",
+        "disabled": false
+      },
+      "metaSortKey": -1652041395471.5,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_2fd12cad431141b792e3a559111ec742",
+      "parentId": "wrk_d4b15675ab3f410a8ab4db3bbce8d8f1",
+      "modified": 1699726920887,
+      "created": 1699213854223,
+      "url": "http://localhost:3333/rooms/enter",
+      "name": "Enter room Player",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n \"player_id\" : \"ea2e2b24-cbd6-47be-8ef0-f30740138921\", \n\t\"room_id\" : \"94dfd148-0139-426b-82d8-d05c54e6317b\", \n\t\"character_id\" : \"64091f6b-512c-4ce6-93af-1fce9dd8ec39\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_bda7870e5aa74b3680d294bf375dac5c"
+        },
+        {
+          "id": "pair_cbb2ddbe6f5c4040b907f110a391ccc3",
+          "name": "",
+          "value": "",
+          "description": ""
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVhMmUyYjI0LWNiZDYtNDdiZS04ZWYwLWYzMDc0MDEzODkyMSIsImVtYWlsIjoidGVzdGVAZ21haWwiLCJpYXQiOjE2OTg2OTc5MDYsImV4cCI6MTczMDIzMzkwNn0.lVHFIJK51UEqBWVGVwziC0j6_AykHwGR2TcU5yCXoXg",
+        "disabled": false
+      },
+      "metaSortKey": -1651871805222.75,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_a4fed293ac8440e7ac655b3626c820ce",
+      "parentId": "wrk_d4b15675ab3f410a8ab4db3bbce8d8f1",
+      "modified": 1699726552037,
+      "created": 1699299910820,
+      "url": "http://localhost:3333/dm/enter",
+      "name": "Enter room Dm",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"room_id\" : \"94dfd148-0139-426b-82d8-d05c54e6317b\", \n\t\"name\" : \"Alexander\",\n\t\"isDm\" : true\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_bda7870e5aa74b3680d294bf375dac5c"
+        },
+        {
+          "id": "pair_cbb2ddbe6f5c4040b907f110a391ccc3",
+          "name": "",
+          "value": "",
+          "description": ""
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVhMmUyYjI0LWNiZDYtNDdiZS04ZWYwLWYzMDc0MDEzODkyMSIsImVtYWlsIjoidGVzdGVAZ21haWwiLCJpYXQiOjE2OTkzMDAzNzgsImV4cCI6MTczMDgzNjM3OH0.mJZ0sy9k8AWCS4FHCxp6yEKB3LMahtfmGYiKynZ2EjY",
+        "disabled": false
+      },
+      "metaSortKey": -1651787010098.375,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_385ab15a20a1494eb3752d6917aeab06",
+      "parentId": "wrk_d4b15675ab3f410a8ab4db3bbce8d8f1",
+      "modified": 1699478711983,
+      "created": 1699390193939,
+      "url": "http://localhost:3333/update-players/4f59ca5d-721b-4af9-bd36-fa84094003b9",
+      "name": "Update players in room",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"playerName\": \"Updated Cyrus\",\n  \"updatedData\": {\n    \"name\": \"Grandmaster warrior cyrus\",\n    \"level\": 3,\n\t\t\"class\" : \"warrior grand master\"\n  }\n}\n"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "User-Agent",
+          "value": "insomnia/2023.5.8"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVhMmUyYjI0LWNiZDYtNDdiZS04ZWYwLWYzMDc0MDEzODkyMSIsImVtYWlsIjoidGVzdGVAZ21haWwiLCJpYXQiOjE2OTkzMDAzNzgsImV4cCI6MTczMDgzNjM3OH0.mJZ0sy9k8AWCS4FHCxp6yEKB3LMahtfmGYiKynZ2EjY"
+      },
+      "metaSortKey": -1651787009998.375,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_a9d6de0660bb47b6892737bf8ddf1452",
+      "parentId": "wrk_d4b15675ab3f410a8ab4db3bbce8d8f1",
+      "modified": 1699561704546,
+      "created": 1652381063214,
+      "url": "http://localhost:3333/characters/f7001b41-8a1d-49d9-846e-74a1337df97e",
+      "name": "Update Character",
+      "description": "",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"neferion\",\n  \"level\": 2,\n \"class\": \"warlock\",\n    \"attributes\": {\n     \"str\": 12,\n     \"dex\": 10,\n     \"con\": 10,\n     \"int\": 10,\n     \"wis\": 10,\n     \"car\": 17\n          },\n \"hitpoints\": 14,\n \"armor_class\": 13,\n\t\"initiative\" : 0\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_a5bfc25c0ffa437883333c48520a5730"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVhMmUyYjI0LWNiZDYtNDdiZS04ZWYwLWYzMDc0MDEzODkyMSIsImVtYWlsIjoidGVzdGVAZ21haWwiLCJpYXQiOjE2OTg2OTc5MDYsImV4cCI6MTczMDIzMzkwNn0.lVHFIJK51UEqBWVGVwziC0j6_AykHwGR2TcU5yCXoXg",
+        "disabled": false
+      },
+      "metaSortKey": -1651787009898.375,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_a80db4f09bf24d739e644a9c7cf9171e",
+      "parentId": "wrk_d4b15675ab3f410a8ab4db3bbce8d8f1",
+      "modified": 1699478819583,
+      "created": 1652382388474,
+      "url": "http://localhost:3333/users/update",
+      "name": "Delete user",
+      "description": "",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"email\" : \"teste@gmail\",\n\t\"password\" : \"123\",\n\t\"name\" : \"alextesteupdate\",\n\t\"isDm\" : true\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVhMmUyYjI0LWNiZDYtNDdiZS04ZWYwLWYzMDc0MDEzODkyMSIsImVtYWlsIjoidGVzdGVAZ21haWwiLCJpYXQiOjE2OTg2OTc5MDYsImV4cCI6MTczMDIzMzkwNn0.lVHFIJK51UEqBWVGVwziC0j6_AykHwGR2TcU5yCXoXg"
+      },
+      "metaSortKey": -1651787009798.375,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_f1075cd9ef57447ba70de1fd8cbbeeb9",
+      "parentId": "wrk_d4b15675ab3f410a8ab4db3bbce8d8f1",
+      "modified": 1699478984285,
+      "created": 1699478895337,
+      "url": "http://localhost:3333/rooms/4f3f0ec2-b7cf-4a52-bccd-efb07175d025",
+      "name": "Delete room",
+      "description": "",
+      "method": "DELETE",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"room_id\" : \"4f3f0ec2-b7cf-4a52-bccd-efb07175d025\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVhMmUyYjI0LWNiZDYtNDdiZS04ZWYwLWYzMDc0MDEzODkyMSIsImVtYWlsIjoidGVzdGVAZ21haWwiLCJpYXQiOjE2OTg2OTc5MDYsImV4cCI6MTczMDIzMzkwNn0.lVHFIJK51UEqBWVGVwziC0j6_AykHwGR2TcU5yCXoXg"
+      },
+      "metaSortKey": -1651744612386.1875,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "env_aca0fe10f9708e8ce1d3053cbd371a5ae9697a4a",
+      "parentId": "wrk_d4b15675ab3f410a8ab4db3bbce8d8f1",
+      "modified": 1652377005451,
+      "created": 1652377005451,
+      "name": "Base Environment",
+      "data": {},
+      "dataPropertyOrder": null,
+      "color": null,
+      "isPrivate": false,
+      "metaSortKey": 1652377005451,
+      "_type": "environment"
+    },
+    {
+      "_id": "jar_aca0fe10f9708e8ce1d3053cbd371a5ae9697a4a",
+      "parentId": "wrk_d4b15675ab3f410a8ab4db3bbce8d8f1",
+      "modified": 1652377005456,
+      "created": 1652377005456,
+      "name": "Default Jar",
+      "cookies": [],
+      "_type": "cookie_jar"
+    },
+    {
+      "_id": "spc_3070099c836f498881b343c4d19595fc",
+      "parentId": "wrk_d4b15675ab3f410a8ab4db3bbce8d8f1",
+      "modified": 1652377005429,
+      "created": 1652377005429,
+      "fileName": "Aulas API",
+      "contents": "",
+      "contentType": "yaml",
+      "_type": "api_spec"
+    }
+  ]
+}
