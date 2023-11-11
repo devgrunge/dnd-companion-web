@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
-import { InitialScreen } from "../views/initialScreen";
+import { InitialScreen } from "../views/InitialScreen.tsx";
 
 export const router = createBrowserRouter([
   {
