@@ -7,8 +7,8 @@ import CssBaseline from "@mui/material/CssBaseline";
 export const App = () => {
   return (
     <Provider store={store}>
-      <RouterProvider router={router} />
       <CssBaseline />
+      <RouterProvider router={router} />
     </Provider>
   );
 };

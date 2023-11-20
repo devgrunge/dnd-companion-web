@@ -1,12 +1,15 @@
-import { Link } from "react-router-dom";
-import Button from "@mui/material/Button";
-import Card from "@mui/material/Card";
+import Container from "@mui/material/Container";
+import SignIn from "../components/SignIn";
+import "../styles/screens/index.css";
+import "../styles/index.css";
 
 export const Login = () => {
   return (
-    <Card>
-      <Button>Welcome to dungeons and dragons battle companion</Button>
-      <Link to="/register">Register your account</Link>
-    </Card>
+    <>
+      <Container className="container">
+        Welcome to dungeons and dragons battle companion
+        <SignIn />
+      </Container>
+    </>
   );
 };
