@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -13,7 +13,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-const Copyright = (props: unknown | any) => {
+export const Copyright = (props: unknown) => {
   return (
     <Typography
       variant="body2"
@@ -24,7 +24,7 @@ const Copyright = (props: unknown | any) => {
       {"Copyright © "}
       <Link color="inherit" href="https://mui.com/">
         Dnd Battle companion
-      </Link>{" "}
+      </Link>
       {new Date().getFullYear()}
       {"."}
     </Typography>
@@ -106,7 +106,7 @@ export const SignIn = () => {
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href="/register" variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>
