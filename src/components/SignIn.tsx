@@ -1,7 +1,7 @@
-import React from "react";
+import * as React from "react";
+import CssBaseline from "@mui/material/CssBaseline";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
@@ -12,8 +12,9 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { useNavigation } from "react-router";
 
-export const Copyright = (props: unknown) => {
+export const Copyright = (props: SxProps) => {
   return (
     <Typography
       variant="body2"
@@ -23,10 +24,8 @@ export const Copyright = (props: unknown) => {
     >
       {"Copyright © "}
       <Link color="inherit" href="https://mui.com/">
-        Dnd Battle companion
+        Dungeons and Dragons Battle companion {new Date().getFullYear()}
       </Link>
-      {new Date().getFullYear()}
-      {"."}
     </Typography>
   );
 };
@@ -34,6 +33,12 @@ export const Copyright = (props: unknown) => {
 const defaultTheme = createTheme();
 
 export const SignIn = () => {
+  const navigate = useNavigation()
+
+  const handleNavigation = async() => {
+    return "teste"
+  }
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -96,6 +101,7 @@ export const SignIn = () => {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              onClick={handleNavigation}
             >
               Sign In
             </Button>
@@ -106,7 +112,7 @@ export const SignIn = () => {
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="/register" variant="body2">
+                <Link href="#" variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>
