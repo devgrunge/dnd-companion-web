@@ -12,7 +12,6 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { useNavigation } from "react-router";
 
 export const Copyright = (props: SxProps) => {
   return (
@@ -30,15 +29,23 @@ export const Copyright = (props: SxProps) => {
   );
 };
 
+interface SignInProps {
+  email: string;
+  password: string;
+  onEmailChange: any;
+  onPasswordChange: any;
+  onHandleLogin: any;
+}
+
 const defaultTheme = createTheme();
 
-export const SignIn = () => {
-  const navigate = useNavigation()
-
-  const handleNavigation = async() => {
-    return "teste"
-  }
-
+export const SignIn = ({
+  email,
+  password,
+  onEmailChange,
+  onPasswordChange,
+  onHandleLogin,
+}: SignInProps) => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -77,8 +84,10 @@ export const SignIn = () => {
               required
               fullWidth
               id="email"
+              onChange={onEmailChange}
               label="Email Address"
               name="email"
+              value={email}
               autoComplete="email"
               autoFocus
             />
@@ -87,6 +96,8 @@ export const SignIn = () => {
               required
               fullWidth
               name="password"
+              value={password}
+              onChange={onPasswordChange}
               label="Password"
               type="password"
               id="password"
@@ -101,7 +112,7 @@ export const SignIn = () => {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
-              onClick={handleNavigation}
+              onClick={() => onHandleLogin(email, password)}
             >
               Sign In
             </Button>
@@ -112,7 +123,7 @@ export const SignIn = () => {
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href="/register" variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>

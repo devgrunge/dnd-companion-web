@@ -5,7 +5,7 @@ import { Register } from "../views/Register.tsx";
 
 export const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/login",
     element: <Login />,
   },
   {
@@ -13,7 +13,7 @@ export const router = createBrowserRouter([
     element: <Register />,
   },
   {
-    path: "/home",
+    path: "/",
     element: <Home />,
   },
 ]);
