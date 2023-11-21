@@ -22,7 +22,7 @@ export const Home = () => {
   const handleClose = () => setOpen(false);
 
   return (
-    <Box sx={{ height: 330, transform: "translateZ(0px)", flexGrow: 1 }}>
+    <Box sx={{ height: '100vh', transform: "translateZ(0px)", flexGrow: 1 }}>
       <Backdrop open={open} />
       <SpeedDial
         ariaLabel="SpeedDial tooltip example"
