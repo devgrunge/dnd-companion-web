@@ -13,10 +13,12 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Copyright } from "./SignIn";
+import { serverParams } from "../hooks/types/useLoginTypes";
 
 const defaultTheme = createTheme();
 
-export default function SignUp() {
+export default function SignUp(serverProps: serverParams) {
+  console.log("server props ==>", serverProps);
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -51,7 +53,7 @@ export default function SignUp() {
             sx={{ mt: 3 }}
           >
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12}>
                 <TextField
                   autoComplete="given-name"
                   name="firstName"
@@ -60,16 +62,6 @@ export default function SignUp() {
                   id="firstName"
                   label="First Name"
                   autoFocus
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  required
-                  fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
-                  autoComplete="family-name"
                 />
               </Grid>
               <Grid item xs={12}>
@@ -88,6 +80,7 @@ export default function SignUp() {
                   fullWidth
                   name="password"
                   label="Password"
+                  // value={serverProps}
                   type="password"
                   id="password"
                   autoComplete="new-password"
@@ -98,7 +91,7 @@ export default function SignUp() {
                   control={
                     <Checkbox value="allowExtraEmails" color="primary" />
                   }
-                  label="I want to receive inspiration, marketing promotions and updates via email."
+                  label="I'm accept terms and conditions to play this board combat mobile assistant"
                 />
               </Grid>
             </Grid>
@@ -106,6 +99,7 @@ export default function SignUp() {
               type="submit"
               fullWidth
               variant="contained"
+              // onClick={}
               sx={{ mt: 3, mb: 2 }}
             >
               Sign Up

@@ -11,7 +11,8 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { createTheme, ThemeProvider, SxProps } from "@mui/material/styles";
+import { SignInProps } from "../hooks/types/useLoginTypes";
 
 export const Copyright = (props: SxProps) => {
   return (
@@ -29,22 +30,15 @@ export const Copyright = (props: SxProps) => {
   );
 };
 
-interface SignInProps {
-  email: string;
-  password: string;
-  onEmailChange: any;
-  onPasswordChange: any;
-  onHandleLogin: any;
-}
-
 const defaultTheme = createTheme();
 
-export const SignIn = ({
+export const SignIn  = ({
   email,
   password,
   onEmailChange,
   onPasswordChange,
   onHandleLogin,
+  apiProps,
 }: SignInProps) => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
