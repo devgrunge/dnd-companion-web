@@ -1,4 +1,4 @@
-import SignUp from "../components/SignUp";
+import { SignUp } from "../components/SignUp";
 import { useLogin } from "../hooks/useLogin";
 
 export const Register = () => {
@@ -12,13 +12,11 @@ export const Register = () => {
 
   return (
     <SignUp
-      serverProps={{
-        registerPlayer,
-        handleNameChange,
-        navigate,
-        handlePasswordChange,
-        handleEmailChange,
-      }}
+      registerPlayer={registerPlayer}
+      handleEmailChange={handleEmailChange}
+      handleNameChange={handleNameChange}
+      handlePasswordChange={handlePasswordChange}
+      navigate={navigate}
     />
   );
 };

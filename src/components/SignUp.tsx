@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
@@ -17,17 +17,14 @@ import { serverParams } from "../hooks/types/useLoginTypes";
 
 const defaultTheme = createTheme();
 
-export default function SignUp(serverProps: serverParams) {
-  console.log("server props ==>", serverProps);
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
-  };
-
+export const SignUp = ({
+  registerPlayer,
+  handleEmailChange,
+  handleNameChange,
+  handlePasswordChange,
+  navigate,
+}: serverParams) => {
+  const [name, setName] = useState("");
   return (
     <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">
@@ -46,12 +43,7 @@ export default function SignUp(serverProps: serverParams) {
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
-          <Box
-            component="form"
-            noValidate
-            onSubmit={handleSubmit}
-            sx={{ mt: 3 }}
-          >
+          <Box component="form" noValidate sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
@@ -61,6 +53,7 @@ export default function SignUp(serverProps: serverParams) {
                   fullWidth
                   id="firstName"
                   label="First Name"
+                  onChange={handleNameChange}
                   autoFocus
                 />
               </Grid>
@@ -72,6 +65,7 @@ export default function SignUp(serverProps: serverParams) {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
+                  onChange={handleEmailChange}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -80,7 +74,7 @@ export default function SignUp(serverProps: serverParams) {
                   fullWidth
                   name="password"
                   label="Password"
-                  // value={serverProps}
+                  onChange={handlePasswordChange}
                   type="password"
                   id="password"
                   autoComplete="new-password"
@@ -96,17 +90,17 @@ export default function SignUp(serverProps: serverParams) {
               </Grid>
             </Grid>
             <Button
-              type="submit"
+              type="button"
               fullWidth
               variant="contained"
-              // onClick={}
+              onClick={registerPlayer}
               sx={{ mt: 3, mb: 2 }}
             >
               Sign Up
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="/login" variant="body2">
+                <Link href="/" variant="body2">
                   Already have an account? Sign in
                 </Link>
               </Grid>
@@ -117,4 +111,4 @@ export default function SignUp(serverProps: serverParams) {
       </Container>
     </ThemeProvider>
   );
-}
+};

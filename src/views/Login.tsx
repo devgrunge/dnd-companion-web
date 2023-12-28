@@ -2,7 +2,6 @@ import Container from "@mui/material/Container";
 import { SignIn } from "../components/SignIn";
 import { Typography } from "@mui/material";
 import { useLogin } from "../hooks/useLogin";
-import { connection } from "../hooks/types/useLoginTypes";
 
 export const Login = () => {
   const {
@@ -12,10 +11,9 @@ export const Login = () => {
     handleLogin,
     handlePasswordChange,
     connection,
-    
   } = useLogin();
 
-  const apiConnect: connection = connection;
+  const apiConnect = connection;
   return (
     <>
       <Container className="container">

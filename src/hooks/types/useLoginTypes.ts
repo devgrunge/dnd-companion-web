@@ -8,8 +8,9 @@ export interface SignInProps {
 }
 
 export interface serverParams {
-  handleEmailChange: () => void;
-  handleNameChange: () => void;
-  handlePasswordChange: () => void;
+  handleEmailChange: () => string;
+  handleNameChange: () => string;
+  handlePasswordChange: () => string;
   navigate: () => void;
+  registerPlayer: (email: string, password: string, name: string) => Response;
 }

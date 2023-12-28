@@ -1,34 +1,54 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
+import { serverParams } from "./types/useLoginTypes";
+import { API_REGISTER_URL, API_URL } from "../.env/constants";
 
+export interface PlayerParams {
+  id?: string;
+  name: string;
+  email?: string;
+  password?: string;
+  characters: [];
+  theme: string;
+}
 export const useLogin = () => {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [connection, setConnection] = useState();
-  const [name, setName] = useState();
+  const [password, setPassword] = useState<PlayerParams["password"]>("");
+  const [connection, setConnection] = useState("");
+  const [name, setName] = useState<PlayerParams>();
+  const [player, setPlayer] = useState<PlayerParams | null>();
 
-  const apiEndpoint: string = "http://dndapi.com:3338";
+  const apiEndpoint: string = API_URL;
 
   const navigate = useNavigate();
 
   const apiConection = async (apiEndpoint: string) => {
-    const apiResponse = await fetch(apiEndpoint);
-    const jsonData = await apiResponse.json();
-    setConnection(jsonData);
+    try {
+      const apiResponse = await fetch(apiEndpoint);
+      if (!apiResponse.ok) {
+        throw new Error(`HTTP error! Status: ${apiResponse.status}`);
+      }
+
+      const jsonData = await apiResponse.json();
+      console.log("json data ==>", jsonData);
+      setConnection(jsonData);
+    } catch (error) {
+      console.error("Error fetching API:", error);
+    }
   };
 
-  const handleEmailChange = (event: any) => {
-    setEmail(event?.target?.value);
+  const handleEmailChange = (event: serverParams) => {
+    setEmail(event.target.value);
     console.log("email ====>", email);
   };
 
-  const handlePasswordChange = (event: any) => {
+  const handlePasswordChange = (event: serverParams) => {
     setPassword(event.target.value);
     console.log("password ==>", password);
   };
 
-  const handleNameChange = (event: any) => {
-    setName(event?.taget?.value);
+  const handleNameChange = (event: serverParams) => {
+    setName(event.target.value);
     console.log("Name ===>", name);
   };
   const handleLogin = (email: string, password: string) => {
@@ -41,17 +61,24 @@ export const useLogin = () => {
     }
   };
 
-  const userData = {
-    email,
-    password,
-    name,
-  };
-
   const registerPlayer = async () => {
-    fetch("http://dndapi.com:3338", {
-      method: "POST",
-      body: JSON.stringify(userData),
-    });
+    try {
+      const userData = { email, password, name };
+      const dataRequest = JSON.stringify(userData);
+      console.log("data request ==>", dataRequest);
+      const registerData = await fetch(API_REGISTER_URL, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        // mode: "no-cors",
+        method: "POST",
+        body: dataRequest,
+      });
+      console.log("registerData ===>", registerData);
+      console.log("Request URL:", API_REGISTER_URL);
+    } catch (error) {
+      throw new Error(`HTTP error! Status: ${error}`);
+    }
   };
 
   useEffect(() => {

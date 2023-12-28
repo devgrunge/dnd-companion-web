@@ -18,7 +18,7 @@ export const Copyright = (props: SxProps) => {
   return (
     <Typography
       variant="body2"
-      color="text.secondary"
+      // color="text.secondary"
       align="center"
       {...props}
     >
@@ -106,7 +106,7 @@ export const SignIn  = ({
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
-              onClick={() => onHandleLogin(email, password)}
+              // onClick={() => onHandleLogin(email, password)}
             >
               Sign In
             </Button>
