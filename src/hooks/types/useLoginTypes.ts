@@ -8,6 +8,7 @@ export interface SignInProps {
 }
 
 export interface serverParams {
+  [x: string]: unknown;
   handleEmailChange: () => string;
   handleNameChange: () => string;
   handlePasswordChange: () => string;

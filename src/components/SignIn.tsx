@@ -11,35 +11,21 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import { createTheme, ThemeProvider, SxProps } from "@mui/material/styles";
-import { SignInProps } from "../hooks/types/useLoginTypes";
-
-export const Copyright = (props: SxProps) => {
-  return (
-    <Typography
-      variant="body2"
-      // color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Dungeons and Dragons Battle companion {new Date().getFullYear()}
-      </Link>
-    </Typography>
-  );
-};
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { useLogin } from "../hooks/useLogin";
+import { Copyright } from "./Copyright";
 
 const defaultTheme = createTheme();
 
-export const SignIn  = ({
-  email,
-  password,
-  onEmailChange,
-  onPasswordChange,
-  onHandleLogin,
-  apiProps,
-}: SignInProps) => {
+export const SignIn = () => {
+  const {
+    password,
+    email,
+    handleLogin,
+    handlePasswordChange,
+    handleEmailChange,
+  } = useLogin();
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -78,7 +64,7 @@ export const SignIn  = ({
               required
               fullWidth
               id="email"
-              onChange={onEmailChange}
+              onChange={handleEmailChange}
               label="Email Address"
               name="email"
               value={email}
@@ -91,7 +77,7 @@ export const SignIn  = ({
               fullWidth
               name="password"
               value={password}
-              onChange={onPasswordChange}
+              onChange={handlePasswordChange}
               label="Password"
               type="password"
               id="password"
@@ -102,11 +88,11 @@ export const SignIn  = ({
               label="Remember me"
             />
             <Button
-              type="submit"
+              type="button"
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
-              // onClick={() => onHandleLogin(email, password)}
+              onClick={handleLogin}
             >
               Sign In
             </Button>

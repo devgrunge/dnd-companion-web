@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import { serverParams } from "./types/useLoginTypes";
-import { API_REGISTER_URL, API_URL } from "../.env/constants";
+import { API_LOGIN_URL, API_REGISTER_URL, API_URL } from "../.env/constants";
+import { useDispatch } from "react-redux";
+import { setToken } from "../store/playerSlice/playerSlice";
+import { Notify } from "../helpers";
 
 export interface PlayerParams {
   id?: string;
@@ -12,13 +15,13 @@ export interface PlayerParams {
   theme: string;
 }
 export const useLogin = () => {
+  const loginUrl: string = API_LOGIN_URL;
+  const apiEndpoint: string = API_URL;
+  const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState<PlayerParams["password"]>("");
   const [connection, setConnection] = useState("");
   const [name, setName] = useState<PlayerParams>();
-  const [player, setPlayer] = useState<PlayerParams | null>();
-
-  const apiEndpoint: string = API_URL;
 
   const navigate = useNavigate();
 
@@ -51,15 +54,6 @@ export const useLogin = () => {
     setName(event.target.value);
     console.log("Name ===>", name);
   };
-  const handleLogin = (email: string, password: string) => {
-    console.log(email, password);
-
-    if (!email || !password) {
-      window.alert("password and email are required");
-    } else {
-      navigate("/dashboard");
-    }
-  };
 
   const registerPlayer = async () => {
     try {
@@ -74,13 +68,52 @@ export const useLogin = () => {
         method: "POST",
         body: dataRequest,
       });
-      console.log("registerData ===>", registerData);
-      console.log("Request URL:", API_REGISTER_URL);
+      if (registerData.ok) {
+        Notify("success", "Playere created sucessfully");
+      } else {
+        console.error("Login failed. Status:", registerData.status);
+        if (registerData.status === 400) {
+          Notify("error", "Failed creating account");
+          throw new Error(`HTTP error! Status: ${registerData.status}`);
+        }
+      }
     } catch (error) {
       throw new Error(`HTTP error! Status: ${error}`);
     }
   };
 
+  const handleLogin = async () => {
+    try {
+      const userData = { email, password };
+      console.log("login attempt", userData);
+      const dataRequest = JSON.stringify(userData);
+      const loginRequest = await fetch(loginUrl, {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        method: "POST",
+        body: dataRequest,
+      });
+
+      if (loginRequest.ok) {
+        const responseData = await loginRequest.json();
+        console.log("login response", responseData);
+        dispatch(setToken(responseData.message));
+        Notify("success", "Login feito com sucesso");
+        navigate("/dashboard");
+      } else {
+        console.error("Login failed. Status:", loginRequest.status);
+        if (loginRequest.status === 400) {
+          Notify("error", "Login failed");
+          throw new Error(`HTTP error! Status: ${loginRequest.status}`);
+        }
+      }
+    } catch (error) {
+      console.error("Error during login:", error);
+      throw new Error(`HTTP error! Status: ${error}`);
+    }
+  };
   useEffect(() => {
     apiConection(apiEndpoint);
   }, [apiEndpoint]);
