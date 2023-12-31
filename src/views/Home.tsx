@@ -1,60 +1,194 @@
 import * as React from "react";
-import Box from "@mui/material/Box";
-import Backdrop from "@mui/material/Backdrop";
-import SpeedDial from "@mui/material/SpeedDial";
-import SpeedDialIcon from "@mui/material/SpeedDialIcon";
-import SpeedDialAction from "@mui/material/SpeedDialAction";
-import FileCopyIcon from "@mui/icons-material/FileCopyOutlined";
-import SaveIcon from "@mui/icons-material/Save";
-import PrintIcon from "@mui/icons-material/Print";
-import ShareIcon from "@mui/icons-material/Share";
-import { ToastContainer, toast } from "react-toastify";
-import Button from "@mui/material/Button";
+import { useTheme } from "@mui/material/styles";
+import AppBar from "@mui/material/AppBar";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
+import Zoom from "@mui/material/Zoom";
+import Fab from "@mui/material/Fab";
+import AddIcon from "@mui/icons-material/Add";
+import EditIcon from "@mui/icons-material/Edit";
+import UpIcon from "@mui/icons-material/KeyboardArrowUp";
+import { green } from "@mui/material/colors";
+import Box from "@mui/material/Box";
+import { SxProps } from "@mui/system";
+import {
+  Button,
+  Card,
+  CardActionArea,
+  CardActions,
+  CardContent,
+  CardMedia,
+  Container,
+  Divider,
+  Grid,
+} from "@mui/material";
+import SvgWarriorIcon from "../assets/Classes/Warrior";
 
-const actions = [
-  { icon: <FileCopyIcon />, name: "Copy" },
-  { icon: <SaveIcon />, name: "Save" },
-  { icon: <PrintIcon />, name: "Print" },
-  { icon: <ShareIcon />, name: "Share" },
-];
+interface TabPanelProps {
+  children?: React.ReactNode;
+  dir?: string;
+  index: number;
+  value: number;
+}
 
-export const Home = () => {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-
-  const notify = () => toast("Wow so easy!");
+function TabPanel(props: TabPanelProps) {
+  const { children, value, index, ...other } = props;
 
   return (
-    <>
-      <Button onClick={notify}>
-        <Typography
-        variant="h2"
-        >Notify!</Typography>
-      </Button>
-      <ToastContainer />
-      <Box sx={{ height:"80vh", transform: "translateZ(0px)", flexGrow: 1 }}>
-        <Backdrop open={open} />
-        <SpeedDial
-          ariaLabel="SpeedDial tooltip example"
-          sx={{ position: "absolute", bottom: 16, right: 16 }}
-          icon={<SpeedDialIcon />}
-          onClose={handleClose}
-          onOpen={handleOpen}
-          open={open}
+    <Typography
+      component="div"
+      role="tabpanel"
+      hidden={value !== index}
+      id={`action-tabpanel-${index}`}
+      aria-labelledby={`action-tab-${index}`}
+      {...other}
+    >
+      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
+    </Typography>
+  );
+}
+
+function a11yProps(index: any) {
+  return {
+    id: `action-tab-${index}`,
+    "aria-controls": `action-tabpanel-${index}`,
+  };
+}
+
+const fabStyle = {
+  position: "absolute",
+  bottom: 16,
+  right: 16,
+};
+
+const fabGreenStyle = {
+  color: "common.white",
+  bgcolor: green[500],
+  "&:hover": {
+    bgcolor: green[600],
+  },
+};
+
+export const Home = () => {
+  const theme = useTheme();
+  const [value, setValue] = React.useState(0);
+
+  const handleChange = (event: unknown, newValue: number) => {
+    setValue(newValue);
+  };
+
+  const handleChangeIndex = (index: number) => {
+    setValue(index);
+  };
+
+  const transitionDuration = {
+    enter: theme.transitions.duration.enteringScreen,
+    exit: theme.transitions.duration.leavingScreen,
+  };
+
+  const fabs = [
+    {
+      color: "primary" as const,
+      sx: fabStyle as SxProps,
+      icon: <AddIcon />,
+      label: "Add",
+    },
+    {
+      color: "secondary" as const,
+      sx: fabStyle as SxProps,
+      icon: <EditIcon />,
+      label: "Edit",
+    },
+    {
+      color: "inherit" as const,
+      sx: { ...fabStyle, ...fabGreenStyle } as SxProps,
+      icon: <UpIcon />,
+      label: "Expand",
+    },
+  ];
+
+  return (
+    <Box
+      sx={{
+        bgcolor: "background.paper",
+        width: "100vw",
+        minHeight: "100vh",
+      }}
+    >
+      <AppBar position="static" color="default">
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          indicatorColor="primary"
+          textColor="primary"
+          variant="fullWidth"
+          aria-label="action tabs example"
         >
-          {actions.map((action) => (
-            <SpeedDialAction
-              key={action.name}
-              icon={action.icon}
-              tooltipTitle={action.name}
-              tooltipOpen
-              onClick={handleClose}
+          <Tab label="Characters ⚒️" {...a11yProps(0)} />
+          <Tab label="Rooms ⚔️" {...a11yProps(1)} />
+          <Tab label="Buy me a coffe ☕" {...a11yProps(2)} />
+        </Tabs>
+      </AppBar>
+
+      <Container
+        sx={{
+          marginTop: 5,
+          width: "80%",
+        }}
+      >
+        <Card sx={{ maxWidth: "100%" }}>
+          <CardActionArea>
+            <CardMedia
+              component="svg"
+              height="140"
+              image={SvgWarriorIcon}
+              alt="Warrior Character"
             />
-          ))}
-        </SpeedDial>
-      </Box>
-    </>
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="div">
+                John doe
+              </Typography>
+              <Grid container spacing={2} columns={{ xs: 12, sm: 12, md: 12 }}>
+                {Array.from(Array(6)).map((_, index) => (
+                  <Grid item xs={2} sm={2} md={2} key={index}>
+                    <Typography variant="body1">
+                      {["Str", "Dex", "Con", "Int", "Wis", "Car"][index]}
+                    </Typography>
+                    <Typography variant="h6">
+                      {Math.floor(Math.random() * 20) + 1}
+                    </Typography>
+                  </Grid>
+                ))}
+              </Grid>
+              <Divider sx={{ width: "100%", marginTop: 2, marginBottom: 2 }} />
+            </CardContent>
+          </CardActionArea>
+          <CardActions>
+            <Button size="small" color="primary">
+              Edit Character
+            </Button>
+          </CardActions>
+        </Card>
+      </Container>
+
+      {fabs.map((fab, index) => (
+        <Zoom
+          key={fab.color}
+          in={value === index}
+          timeout={transitionDuration}
+          style={{
+            transitionDelay: `${
+              value === index ? transitionDuration.exit : 0
+            }ms`,
+          }}
+          unmountOnExit
+        >
+          <Fab sx={fab.sx} aria-label={fab.label} color={fab.color}>
+            {fab.icon}
+          </Fab>
+        </Zoom>
+      ))}
+    </Box>
   );
 };
