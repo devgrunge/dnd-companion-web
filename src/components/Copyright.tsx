@@ -5,7 +5,7 @@ export const Copyright = (props: SxProps) => {
   return (
     <Typography
       variant="body2"
-      // color="text.secondary"
+      color="text.secondary"
       align="center"
       {...props}
     >

@@ -5,7 +5,6 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Zoom from "@mui/material/Zoom";
 import Fab from "@mui/material/Fab";
-import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
 import UpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { green } from "@mui/material/colors";
@@ -15,6 +14,7 @@ import { Container } from "@mui/material";
 import { CoffeTab } from "../components/BuyMeACoffe";
 import { RoomsBoard } from "../components/Rooms";
 import { CharacterCard } from "../components/CharacterCard";
+import { PlayerActions } from "../components/PlayerActions";
 
 
 const a11yProps = (index: number) => {
@@ -46,9 +46,9 @@ export const Home = () => {
     setValue(newValue);
   };
 
-  const handleChangeIndex = (index: number) => {
-    setValue(index);
-  };
+  // const handleChangeIndex = (index: number) => {
+  //   setValue(index);
+  // };
 
   const transitionDuration = {
     enter: theme.transitions.duration.enteringScreen,
@@ -59,7 +59,7 @@ export const Home = () => {
     {
       color: "primary" as const,
       sx: fabStyle as SxProps,
-      icon: <AddIcon />,
+      icon: <PlayerActions />,
       label: "Add",
     },
     {
@@ -102,7 +102,7 @@ export const Home = () => {
       <Container
         sx={{
           marginTop: 5,
-          width: "80%",
+          width: "100%",
         }}
       >
         {value === 0 && <CharacterCard />}
