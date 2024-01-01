@@ -1,9 +1,8 @@
-import * as React from "react";
+import { useState } from "react";
 import { useTheme } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import Typography from "@mui/material/Typography";
 import Zoom from "@mui/material/Zoom";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
@@ -12,49 +11,18 @@ import UpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { green } from "@mui/material/colors";
 import Box from "@mui/material/Box";
 import { SxProps } from "@mui/system";
-import {
-  Button,
-  Card,
-  CardActionArea,
-  CardActions,
-  CardContent,
-  CardMedia,
-  Container,
-  Divider,
-  Grid,
-} from "@mui/material";
-import SvgWarriorIcon from "../assets/Classes/Warrior";
+import { Container } from "@mui/material";
+import { CoffeTab } from "../components/BuyMeACoffe";
+import { RoomsBoard } from "../components/Rooms";
+import { CharacterCard } from "../components/CharacterCard";
 
-interface TabPanelProps {
-  children?: React.ReactNode;
-  dir?: string;
-  index: number;
-  value: number;
-}
 
-function TabPanel(props: TabPanelProps) {
-  const { children, value, index, ...other } = props;
-
-  return (
-    <Typography
-      component="div"
-      role="tabpanel"
-      hidden={value !== index}
-      id={`action-tabpanel-${index}`}
-      aria-labelledby={`action-tab-${index}`}
-      {...other}
-    >
-      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
-    </Typography>
-  );
-}
-
-function a11yProps(index: any) {
+const a11yProps = (index: number) => {
   return {
     id: `action-tab-${index}`,
     "aria-controls": `action-tabpanel-${index}`,
   };
-}
+};
 
 const fabStyle = {
   position: "absolute",
@@ -72,7 +40,7 @@ const fabGreenStyle = {
 
 export const Home = () => {
   const theme = useTheme();
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
 
   const handleChange = (event: unknown, newValue: number) => {
     setValue(newValue);
@@ -137,39 +105,9 @@ export const Home = () => {
           width: "80%",
         }}
       >
-        <Card sx={{ maxWidth: "100%" }}>
-          <CardActionArea>
-            <CardMedia
-              component="svg"
-              height="140"
-              image={SvgWarriorIcon}
-              alt="Warrior Character"
-            />
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
-                John doe
-              </Typography>
-              <Grid container spacing={2} columns={{ xs: 12, sm: 12, md: 12 }}>
-                {Array.from(Array(6)).map((_, index) => (
-                  <Grid item xs={2} sm={2} md={2} key={index}>
-                    <Typography variant="body1">
-                      {["Str", "Dex", "Con", "Int", "Wis", "Car"][index]}
-                    </Typography>
-                    <Typography variant="h6">
-                      {Math.floor(Math.random() * 20) + 1}
-                    </Typography>
-                  </Grid>
-                ))}
-              </Grid>
-              <Divider sx={{ width: "100%", marginTop: 2, marginBottom: 2 }} />
-            </CardContent>
-          </CardActionArea>
-          <CardActions>
-            <Button size="small" color="primary">
-              Edit Character
-            </Button>
-          </CardActions>
-        </Card>
+        {value === 0 && <CharacterCard />}
+        {value === 1 && <RoomsBoard />}
+        {value === 2 && <CoffeTab />}
       </Container>
 
       {fabs.map((fab, index) => (
