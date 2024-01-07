@@ -1,19 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, ChangeEvent } from "react";
 import { useNavigate } from "react-router";
-import { serverParams } from "./types/useLoginTypes";
 import { API_LOGIN_URL, API_REGISTER_URL, API_URL } from "../.env/constants";
 import { useDispatch } from "react-redux";
 import { setToken } from "../store/playerSlice/playerSlice";
 import { Notify } from "../helpers";
+import { PlayerParams } from "./types/useLoginTypes";
 
-export interface PlayerParams {
-  id?: string;
-  name: string;
-  email?: string;
-  password?: string;
-  characters: [];
-  theme: string;
-}
 export const useLogin = () => {
   const loginUrl: string = API_LOGIN_URL;
   const apiEndpoint: string = API_URL;
@@ -21,7 +13,7 @@ export const useLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState<PlayerParams["password"]>("");
   const [connection, setConnection] = useState("");
-  const [name, setName] = useState<PlayerParams>();
+  const [name, setName] = useState<PlayerParams["name"]>("");
 
   const navigate = useNavigate();
 
@@ -40,19 +32,16 @@ export const useLogin = () => {
     }
   };
 
-  const handleEmailChange = (event: serverParams) => {
+  const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
-    console.log("email ====>", email);
   };
 
-  const handlePasswordChange = (event: serverParams) => {
+  const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
-    console.log("password ==>", password);
   };
 
-  const handleNameChange = (event: serverParams) => {
+  const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);
-    console.log("Name ===>", name);
   };
 
   const registerPlayer = async () => {
@@ -85,7 +74,6 @@ export const useLogin = () => {
   const handleLogin = async () => {
     try {
       const userData = { email, password };
-      console.log("login attempt", userData);
       const dataRequest = JSON.stringify(userData);
       const loginRequest = await fetch(loginUrl, {
         headers: {
@@ -110,7 +98,7 @@ export const useLogin = () => {
         }
       }
     } catch (error) {
-      console.error("Error during login:", error);
+      console.warn("Error during login:", error);
       throw new Error(`HTTP error! Status: ${error}`);
     }
   };

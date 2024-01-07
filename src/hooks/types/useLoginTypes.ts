@@ -15,3 +15,12 @@ export interface serverParams {
   navigate: () => void;
   registerPlayer: (email: string, password: string, name: string) => Response;
 }
+
+export interface PlayerParams {
+  id?: string;
+  name?: string;
+  email?: string;
+  password?: string;
+  characters: [];
+  theme: string;
+}

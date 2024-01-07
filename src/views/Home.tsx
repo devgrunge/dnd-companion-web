@@ -16,7 +16,6 @@ import { RoomsBoard } from "../components/Rooms";
 import { CharacterCard } from "../components/CharacterCard";
 import { PlayerActions } from "../components/PlayerActions";
 
-
 const a11yProps = (index: number) => {
   return {
     id: `action-tab-${index}`,
@@ -41,14 +40,11 @@ const fabGreenStyle = {
 export const Home = () => {
   const theme = useTheme();
   const [value, setValue] = useState(0);
+  const [fabState, setFabState] = useState();
 
   const handleChange = (event: unknown, newValue: number) => {
     setValue(newValue);
   };
-
-  // const handleChangeIndex = (index: number) => {
-  //   setValue(index);
-  // };
 
   const transitionDuration = {
     enter: theme.transitions.duration.enteringScreen,
@@ -105,28 +101,28 @@ export const Home = () => {
           width: "100%",
         }}
       >
+        {fabs.map((fab, index) => (
+          <Zoom
+            key={fab.color}
+            in={value === index}
+            timeout={transitionDuration}
+            style={{
+              transitionDelay: `${
+                value === index ? transitionDuration.exit : 0
+              }ms`,
+            }}
+            unmountOnExit
+          >
+            <Fab sx={fab.sx} aria-label={fab.label} color={fab.color}>
+              {fab.icon}
+            </Fab>
+          </Zoom>
+        ))}
+
         {value === 0 && <CharacterCard />}
         {value === 1 && <RoomsBoard />}
         {value === 2 && <CoffeTab />}
       </Container>
-
-      {fabs.map((fab, index) => (
-        <Zoom
-          key={fab.color}
-          in={value === index}
-          timeout={transitionDuration}
-          style={{
-            transitionDelay: `${
-              value === index ? transitionDuration.exit : 0
-            }ms`,
-          }}
-          unmountOnExit
-        >
-          <Fab sx={fab.sx} aria-label={fab.label} color={fab.color}>
-            {fab.icon}
-          </Fab>
-        </Zoom>
-      ))}
     </Box>
   );
 };
