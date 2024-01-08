@@ -2,7 +2,7 @@ import { useState, useEffect, ChangeEvent } from "react";
 import { useNavigate } from "react-router";
 import { API_LOGIN_URL, API_REGISTER_URL, API_URL } from "../.env/constants";
 import { useDispatch } from "react-redux";
-import { setToken } from "../store/playerSlice/playerSlice";
+import { setToken, setPlayerData } from "../store/playerSlice/playerSlice";
 import { Notify } from "../helpers";
 import { PlayerParams } from "./types/useLoginTypes";
 
@@ -48,7 +48,6 @@ export const useLogin = () => {
     try {
       const userData = { email, password, name };
       const dataRequest = JSON.stringify(userData);
-      console.log("data request ==>", dataRequest);
       const registerData = await fetch(API_REGISTER_URL, {
         headers: {
           "Content-Type": "application/json",
@@ -57,12 +56,26 @@ export const useLogin = () => {
         method: "POST",
         body: dataRequest,
       });
+      const responseData = await registerData.json();
+
       if (registerData.ok) {
-        Notify("success", "Playere created sucessfully");
+        const playerData = {
+          token: "",
+          id: responseData.success.id,
+          email: responseData.success.email,
+          password: responseData.success.id.password,
+          name: responseData.success.name,
+          characters: responseData.success.characters,
+          isDm: responseData.success.isDm,
+          theme: responseData.success.theme,
+        };
+        dispatch(setPlayerData(playerData));
+        Notify("success", "Player created sucessfully");
+        navigate("/")
       } else {
-        console.error("Login failed. Status:", registerData.status);
+        console.log("register data ", registerData);
         if (registerData.status === 400) {
-          Notify("error", "Failed creating account");
+          Notify("error", `Failed creating account`);
           throw new Error(`HTTP error! Status: ${registerData.status}`);
         }
       }
@@ -86,7 +99,6 @@ export const useLogin = () => {
 
       if (loginRequest.ok) {
         const responseData = await loginRequest.json();
-        console.log("login response", responseData);
         dispatch(setToken(responseData.message));
         Notify("success", "Login feito com sucesso");
         navigate("/dashboard");

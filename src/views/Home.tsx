@@ -40,7 +40,7 @@ const fabGreenStyle = {
 export const Home = () => {
   const theme = useTheme();
   const [value, setValue] = useState(0);
-  const [fabState, setFabState] = useState();
+  
 
   const handleChange = (event: unknown, newValue: number) => {
     setValue(newValue);

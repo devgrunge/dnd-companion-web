@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { PlayerData } from "./types/storeTypes";
+import { Characters, PlayerData } from "./types/storeTypes";
 
 const initialState: PlayerData = {
   token: "",
@@ -7,9 +7,9 @@ const initialState: PlayerData = {
   email: "",
   password: "",
   name: "",
-  characters: [],
+  characters: [] as Characters[],
   isDm: false,
-  theme: "",
+  theme: "default",
 };
 
 export const playerSlice = createSlice({
@@ -23,9 +23,12 @@ export const playerSlice = createSlice({
       state.token = action.payload;
       console.log("token ==>", state.token);
     },
+    setPlayerData: (state, action: PayloadAction<PlayerData>) => {
+      return action.payload;
+    },
   },
 });
 
-export const { setLogin, setToken } = playerSlice.actions;
+export const { setLogin, setToken, setPlayerData } = playerSlice.actions;
 
 export default playerSlice.reducer;
