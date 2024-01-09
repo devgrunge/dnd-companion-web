@@ -7,14 +7,16 @@ import Zoom from "@mui/material/Zoom";
 import Fab from "@mui/material/Fab";
 import EditIcon from "@mui/icons-material/Edit";
 import UpIcon from "@mui/icons-material/KeyboardArrowUp";
-import { green } from "@mui/material/colors";
 import Box from "@mui/material/Box";
+import { green } from "@mui/material/colors";
 import { SxProps } from "@mui/system";
 import { Container } from "@mui/material";
 import { CoffeTab } from "../components/BuyMeACoffe";
 import { RoomsBoard } from "../components/Rooms";
 import { CharacterCard } from "../components/CharacterCard";
 import { PlayerActions } from "../components/PlayerActions";
+import { useSelector } from "react-redux";
+import { NoCharacters } from "../components/noCharacters";
 
 const a11yProps = (index: number) => {
   return {
@@ -40,7 +42,6 @@ const fabGreenStyle = {
 export const Home = () => {
   const theme = useTheme();
   const [value, setValue] = useState(0);
-  
 
   const handleChange = (event: unknown, newValue: number) => {
     setValue(newValue);
@@ -71,6 +72,7 @@ export const Home = () => {
       label: "Expand",
     },
   ];
+  const playerData = useSelector((state) => state.player);
 
   return (
     <Box
@@ -119,7 +121,12 @@ export const Home = () => {
           </Zoom>
         ))}
 
-        {value === 0 && <CharacterCard />}
+        {value === 0 &&
+          (playerData.characters.lenght === 0 ? (
+            <CharacterCard />
+          ) : (
+            <NoCharacters />
+          ))}
         {value === 1 && <RoomsBoard />}
         {value === 2 && <CoffeTab />}
       </Container>

@@ -1,8 +1,8 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { combineReducers } from "@reduxjs/toolkit";
 import playerSlice from "./playerSlice/playerSlice";
 
-export const store = configureStore({
-  reducer: {
-    player: playerSlice,
-  },
+const rootReducer = combineReducers({
+  player: playerSlice,
 });
+
+export const Slices = rootReducer;

@@ -24,7 +24,7 @@ export const playerSlice = createSlice({
       console.log("token ==>", state.token);
     },
     setPlayerData: (state, action: PayloadAction<PlayerData>) => {
-      return action.payload;
+      return { ...state, ...action.payload };
     },
   },
 });
