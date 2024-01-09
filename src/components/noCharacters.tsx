@@ -1,28 +1,29 @@
-import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import { usePlayer } from "../hooks/usePlayer";
-
-const classesOptions = [
-  "Warrior",
-  "Mage",
-  "Rogue",
-  "Cleric",
-  "Druid",
-  "Paladin",
-  "Sorcerer",
-];
-
-const attributes = ["Str", "Dex", "Con", "Int", "Wis", "Car"];
+import { Container, Typography } from "@mui/material";
 
 export const NoCharacters = () => {
-  const { handleSubmit, formData, handleAttributeChange, handleInputChange } =
-    usePlayer();
+  const {
+    formData,
+    handleAttributeChange,
+    handleInputChange,
+    classesOptions,
+    attributes,
+    handleSubmit,
+  } = usePlayer();
 
   return (
-    <form onSubmit={handleSubmit}>
+    <Container
+      sx={{
+        maxWidth: "100%",
+      }}
+    >
+      <Typography gutterBottom variant="h6" component="div">
+        Don't have a character? Create your first one here!
+      </Typography>
       <TextField
         label="Name"
         variant="outlined"
@@ -54,7 +55,7 @@ export const NoCharacters = () => {
             margin="normal"
           />
         )}
-        onChange={(_, value) => handleInputChange("selectedClass", value)}
+        onChange={(_, value) => handleInputChange("class", value)}
       />
       <Stack direction="row" spacing={2}>
         {attributes.map((attribute) => (
@@ -91,7 +92,7 @@ export const NoCharacters = () => {
         fullWidth
         value={formData.armorClass}
         onChange={(e) =>
-          handleInputChange("armorClass", parseInt(e.target.value, 10))
+          handleInputChange("armor_class", parseInt(e.target.value, 10))
         }
         margin="normal"
       />
@@ -106,9 +107,18 @@ export const NoCharacters = () => {
         }
         margin="normal"
       />
-      <Button type="submit" variant="contained" color="primary">
+      <Button
+        sx={{
+          marginTop: 5,
+          width: "100%",
+        }}
+        type="submit"
+        variant="contained"
+        color="primary"
+        onClick={handleSubmit}
+      >
         Submit
       </Button>
-    </form>
+    </Container>
   );
 };

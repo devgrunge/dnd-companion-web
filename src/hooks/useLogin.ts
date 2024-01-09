@@ -25,7 +25,6 @@ export const useLogin = () => {
       }
 
       const jsonData = await apiResponse.json();
-      console.log("json data ==>", jsonData);
       setConnection(jsonData);
     } catch (error) {
       console.error("Error fetching API:", error);
@@ -71,7 +70,7 @@ export const useLogin = () => {
         };
         dispatch(setPlayerData(playerData));
         Notify("success", "Player created sucessfully");
-        navigate("/")
+        navigate("/");
       } else {
         console.log("register data ", registerData);
         if (registerData.status === 400) {
@@ -99,7 +98,7 @@ export const useLogin = () => {
 
       if (loginRequest.ok) {
         const responseData = await loginRequest.json();
-        dispatch(setToken(responseData.message));
+        dispatch(setToken(responseData));
         Notify("success", "Login feito com sucesso");
         navigate("/dashboard");
       } else {
