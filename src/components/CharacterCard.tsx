@@ -12,20 +12,12 @@ import {
   Typography,
 } from "@mui/material";
 import { CharacterEditModal } from "./CharacterEditModal";
+import { Characters } from "../store/playerSlice/types/storeTypes";
+import { useCharacter } from "../hooks/useCharacter";
 
-export const CharacterCard: React.FC = () => {
-  const image =
-    "https://images.unsplash.com/photo-1559999831-7deaf136d4a9?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
-
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-
-  const handleEditClick = () => {
-    setIsEditModalOpen(true);
-  };
-
-  const handleEditModalClose = () => {
-    setIsEditModalOpen(false);
-  };
+export const CharacterCard: React.FC = (key: index, characters: Characters) => {
+  const { image, isEditModalOpen, handleEditModalClose, handleEditClick } =
+    useCharacter();
 
   return (
     <Container sx={{ marginTop: 5, width: "100%" }}>

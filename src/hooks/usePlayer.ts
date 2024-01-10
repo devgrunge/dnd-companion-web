@@ -1,12 +1,13 @@
-import { ChangeEvent, useState } from "react";
-import { useSelector } from "react-redux";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store";
 import { Notify } from "../helpers";
 import { API_CREATE_CHARACTER_URL } from "../.env/constants";
+import { setCharacter } from "../store/playerSlice/playerSlice";
 
 export const usePlayer = () => {
   const playerData = useSelector((state: RootState) => state.player);
-  // console.log(playerData.token)
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     name: "",
     level: 1,
@@ -47,24 +48,27 @@ export const usePlayer = () => {
     });
   };
 
-  const handleSubmit = async (e: ChangeEvent<HTMLInputElement>) => {
+  console.log("token ", playerData.token);
+  const handleSubmit = async () => {
     try {
-      e.preventDefault();
       console.log("Form data submitted:", formData);
       const requestData = JSON.stringify(formData);
-      console.log("request data ==> ",requestData)
+      console.log("request data ==> ", requestData);
       const createPlayer = await fetch(API_CREATE_CHARACTER_URL, {
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + playerData.token,
+          Accept: "application/json",
         },
-        mode: "cors",
+        // mode: "cors",
         method: "POST",
         body: requestData,
       });
       const responseData = await createPlayer.json();
-      if (responseData.ok) {
+      console.log("response data ==> ", createPlayer);
+      if (createPlayer.status === 201) {
         Notify("success", "Character created successfully");
+        dispatch(setCharacter(responseData));
       } else {
         Notify("error", "Error while creating character");
         throw new Error(`Error creating character`);

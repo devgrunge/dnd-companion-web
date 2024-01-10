@@ -26,9 +26,13 @@ export const playerSlice = createSlice({
     setPlayerData: (state, action: PayloadAction<PlayerData>) => {
       return { ...state, ...action.payload };
     },
+    setCharacter: (state, action: PayloadAction<Characters>) => {
+      state.characters.push(action.payload);
+    },
   },
 });
 
-export const { setLogin, setToken, setPlayerData } = playerSlice.actions;
+export const { setLogin, setToken, setPlayerData, setCharacter } =
+  playerSlice.actions;
 
 export default playerSlice.reducer;

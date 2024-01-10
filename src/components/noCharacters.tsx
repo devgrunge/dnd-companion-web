@@ -90,7 +90,7 @@ export const NoCharacters = () => {
         type="number"
         variant="outlined"
         fullWidth
-        value={formData.armorClass}
+        value={formData.armor_class}
         onChange={(e) =>
           handleInputChange("armor_class", parseInt(e.target.value, 10))
         }

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTheme } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Tabs from "@mui/material/Tabs";
@@ -17,6 +17,7 @@ import { CharacterCard } from "../components/CharacterCard";
 import { PlayerActions } from "../components/PlayerActions";
 import { useSelector } from "react-redux";
 import { NoCharacters } from "../components/noCharacters";
+import { RootState } from "../store";
 
 const a11yProps = (index: number) => {
   return {
@@ -42,6 +43,7 @@ const fabGreenStyle = {
 export const Home = () => {
   const theme = useTheme();
   const [value, setValue] = useState(0);
+  const [hasCharacter, setHasCharacter] = useState(0);
 
   const handleChange = (event: unknown, newValue: number) => {
     setValue(newValue);
@@ -72,7 +74,7 @@ export const Home = () => {
       label: "Expand",
     },
   ];
-  const playerData = useSelector((state) => state.player);
+  const playerData = useSelector((state: RootState) => state.player);
 
   return (
     <Box
@@ -121,12 +123,17 @@ export const Home = () => {
           </Zoom>
         ))}
 
-        {value === 0 &&
-          (playerData.characters.lenght === 0 ? (
-            <CharacterCard />
-          ) : (
-            <NoCharacters />
-          ))}
+        {value === 0 && (
+          <>
+            {playerData.characters.length === 0 ? (
+              <NoCharacters />
+            ) : (
+              playerData.characters.map((character, index) => (
+                <CharacterCard key={index} character={character} />
+              ))
+            )}
+          </>
+        )}
         {value === 1 && <RoomsBoard />}
         {value === 2 && <CoffeTab />}
       </Container>

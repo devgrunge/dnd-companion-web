@@ -98,7 +98,7 @@ export const useLogin = () => {
 
       if (loginRequest.ok) {
         const responseData = await loginRequest.json();
-        dispatch(setToken(responseData));
+        dispatch(setToken(responseData.message));
         Notify("success", "Login feito com sucesso");
         navigate("/dashboard");
       } else {

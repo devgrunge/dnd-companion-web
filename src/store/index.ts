@@ -15,7 +15,7 @@ import { Slices } from "./configureStore";
 const persistConfig = {
   key: "rpgBoardAssistant",
   storage,
-  whitelist: [],
+  whitelist: ["player"],
 };
 const persistedReducers = persistReducer(persistConfig, Slices);
 
