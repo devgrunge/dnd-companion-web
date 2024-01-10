@@ -11,12 +11,12 @@ import {
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 
-interface CharacterEditModalProps {
+interface ModalProps {
   open: boolean;
   onClose: () => void;
 }
 
-export const CharacterEditModal: React.FC<CharacterEditModalProps> = ({
+export const CharacterModal: React.FC<ModalProps> = ({
   open,
   onClose,
 }) => {

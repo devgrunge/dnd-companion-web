@@ -5,7 +5,7 @@ import Stack from "@mui/material/Stack";
 import { usePlayer } from "../hooks/usePlayer";
 import { Container, Typography } from "@mui/material";
 
-export const NoCharacters = () => {
+export const CreateCharacter = () => {
   const {
     formData,
     handleAttributeChange,

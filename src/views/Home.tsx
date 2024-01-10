@@ -16,8 +16,8 @@ import { RoomsBoard } from "../components/Rooms";
 import { CharacterCard } from "../components/CharacterCard";
 import { PlayerActions } from "../components/PlayerActions";
 import { useSelector } from "react-redux";
-import { NoCharacters } from "../components/noCharacters";
 import { RootState } from "../store";
+import { CreateCharacter } from "../components/CreateCharacter";
 
 const a11yProps = (index: number) => {
   return {
@@ -126,7 +126,7 @@ export const Home = () => {
         {value === 0 && (
           <>
             {playerData.characters.length === 0 ? (
-              <NoCharacters />
+              <CreateCharacter />
             ) : (
               playerData.characters.map((character, index) => (
                 <CharacterCard key={index} character={character} />

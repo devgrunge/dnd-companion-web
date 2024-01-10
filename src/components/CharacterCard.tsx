@@ -11,7 +11,7 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
-import { CharacterEditModal } from "./CharacterEditModal";
+import { CharacterModal } from "./CharacterModal";
 import { Characters } from "../store/playerSlice/types/storeTypes";
 import { useCharacter } from "../hooks/useCharacter";
 
@@ -55,10 +55,7 @@ export const CharacterCard: React.FC = (key: index, characters: Characters) => {
         </CardActions>
       </Card>
 
-      <CharacterEditModal
-        open={isEditModalOpen}
-        onClose={handleEditModalClose}
-      />
+      <CharacterModal open={isEditModalOpen} onClose={handleEditModalClose} />
     </Container>
   );
 };

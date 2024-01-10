@@ -51,7 +51,6 @@ export const usePlayer = () => {
   console.log("token ", playerData.token);
   const handleSubmit = async () => {
     try {
-      console.log("Form data submitted:", formData);
       const requestData = JSON.stringify(formData);
       console.log("request data ==> ", requestData);
       const createPlayer = await fetch(API_CREATE_CHARACTER_URL, {
@@ -75,6 +74,37 @@ export const usePlayer = () => {
       }
     } catch (error) {
       Notify("error", "Error while creating character");
+      throw new Error(`Internal server error": ${error}`);
+    }
+  };
+
+  const getCharacters = async () => {
+    try {
+      console.log("method called");
+      const caracterData = {
+        name: playerData.name,
+        email: playerData.email,
+        password: playerData.password,
+      };
+      const requestData = JSON.stringify(caracterData);
+      const listCharacters = await fetch("", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + playerData.token,
+          Accept: "application/json",
+        },
+        method: "GET",
+        body: requestData,
+      });
+      if (listCharacters.status === 200) {
+        Notify("success", "Characters loaded!");
+        console.log("listing characters ", listCharacters);
+      } else {
+        Notify("error", "Error loading characters");
+        throw new Error(`Error loading characters`);
+      }
+    } catch (error) {
+      Notify("error", "Error getting character(s) data");
       throw new Error(`Internal server error": ${error}`);
     }
   };
@@ -103,5 +133,6 @@ export const usePlayer = () => {
     setFormData,
     attributes,
     classesOptions,
+    getCharacters,
   };
 };
