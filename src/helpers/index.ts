@@ -13,14 +13,4 @@ export const Notify = (type: string, message: string) => {
       break;
   }
 };
-
-export const DataValidation = (
-  name: string | null,
-  email: string | undefined,
-  password: string | undefined
-) => {
-  if (!email || !password || !name) {
-    Notify("error", "Wrong credentials");
-    throw new Error("Wrong credentials");
-  }
-};
+  

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useTheme } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Tabs from "@mui/material/Tabs";
@@ -43,7 +43,6 @@ const fabGreenStyle = {
 export const Home = () => {
   const theme = useTheme();
   const [value, setValue] = useState(0);
-  const [hasCharacter, setHasCharacter] = useState(0);
 
   const handleChange = (event: unknown, newValue: number) => {
     setValue(newValue);

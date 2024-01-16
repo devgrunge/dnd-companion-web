@@ -1,9 +1,9 @@
 export interface PlayerData {
   token: string;
   id: string;
-  email: string;
-  password: string;
-  name: string;
+  email: string | undefined;
+  password: string | undefined;
+  name: string | undefined;
   characters: Characters[];
   isDm: boolean;
   theme: string;

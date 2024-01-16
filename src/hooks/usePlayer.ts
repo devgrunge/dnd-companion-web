@@ -6,8 +6,7 @@ import { API_CREATE_CHARACTER_URL } from "../.env/constants";
 import { setCharacter } from "../store/playerSlice/playerSlice";
 
 export const usePlayer = () => {
-  const playerData = useSelector((state: RootState) => state.player);
-  const dispatch = useDispatch();
+  const [player, setPlayer] = useState({});
   const [formData, setFormData] = useState({
     name: "",
     level: 1,
@@ -48,11 +47,9 @@ export const usePlayer = () => {
     });
   };
 
-  console.log("token ", playerData.token);
-  const handleSubmit = async () => {
+  const createCharacter = async () => {
     try {
       const requestData = JSON.stringify(formData);
-      console.log("request data ==> ", requestData);
       const createPlayer = await fetch(API_CREATE_CHARACTER_URL, {
         headers: {
           "Content-Type": "application/json",
@@ -64,10 +61,10 @@ export const usePlayer = () => {
         body: requestData,
       });
       const responseData = await createPlayer.json();
-      console.log("response data ==> ", createPlayer);
       if (createPlayer.status === 201) {
         Notify("success", "Character created successfully");
-        dispatch(setCharacter(responseData));
+        console.log("response data ==> ", responseData);
+        // dispatch(setCharacter(responseData.created));
       } else {
         Notify("error", "Error while creating character");
         throw new Error(`Error creating character`);
@@ -86,7 +83,7 @@ export const usePlayer = () => {
         email: playerData.email,
         password: playerData.password,
       };
-      const requestData = JSON.stringify(caracterData);
+      console.log("data ==> ", caracterData);
       const listCharacters = await fetch("", {
         headers: {
           "Content-Type": "application/json",
@@ -94,7 +91,6 @@ export const usePlayer = () => {
           Accept: "application/json",
         },
         method: "GET",
-        body: requestData,
       });
       if (listCharacters.status === 200) {
         Notify("success", "Characters loaded!");
@@ -126,13 +122,14 @@ export const usePlayer = () => {
 
   return {
     handleInputChange,
-    handleSubmit,
+    createCharacter,
     handleAttributeChange,
     formData,
-    playerData,
     setFormData,
     attributes,
     classesOptions,
     getCharacters,
+    setPlayer,
+    player,
   };
 };

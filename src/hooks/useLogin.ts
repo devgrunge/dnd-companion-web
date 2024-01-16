@@ -2,7 +2,11 @@ import { useState, useEffect, ChangeEvent } from "react";
 import { useNavigate } from "react-router";
 import { API_LOGIN_URL, API_REGISTER_URL, API_URL } from "../.env/constants";
 import { useDispatch } from "react-redux";
-import { setToken, setPlayerData } from "../store/playerSlice/playerSlice";
+import {
+  setToken,
+  setPlayerData,
+  setLogin,
+} from "../store/playerSlice/playerSlice";
 import { Notify } from "../helpers";
 import { PlayerParams } from "./types/useLoginTypes";
 
@@ -95,6 +99,7 @@ export const useLogin = () => {
         method: "POST",
         body: dataRequest,
       });
+      console.log("login request ==> ", loginRequest);
 
       if (loginRequest.ok) {
         const responseData = await loginRequest.json();

@@ -4,6 +4,7 @@ import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import { usePlayer } from "../hooks/usePlayer";
 import { Container, Typography } from "@mui/material";
+import { useEffect } from "react";
 
 export const CreateCharacter = () => {
   const {
@@ -12,8 +13,17 @@ export const CreateCharacter = () => {
     handleInputChange,
     classesOptions,
     attributes,
-    handleSubmit,
+    createCharacter,
+    player,
+    setPlayer,
   } = usePlayer();
+
+  useEffect(() => {
+    console.log(player);
+    if (player) {
+      return "player";
+    }
+  }, [player]);
 
   return (
     <Container
@@ -115,7 +125,7 @@ export const CreateCharacter = () => {
         type="submit"
         variant="contained"
         color="primary"
-        onClick={handleSubmit}
+        onClick={createCharacter}
       >
         Submit
       </Button>
