@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store";
 import { Notify } from "../helpers";
-import { API_CREATE_CHARACTER_URL } from "../.env/constants";
+import { API_CHARACTERS_URL } from "../.env/constants";
 import { setCharacter } from "../store/playerSlice/playerSlice";
 
 export const usePlayer = () => {
@@ -23,6 +23,8 @@ export const usePlayer = () => {
     armor_class: 0,
     initiative: 0,
   });
+
+  const playerData = useSelector((state: RootState) => state.player);
 
   const handleInputChange = (
     field: string | number,
@@ -50,10 +52,10 @@ export const usePlayer = () => {
   const createCharacter = async () => {
     try {
       const requestData = JSON.stringify(formData);
-      const createPlayer = await fetch(API_CREATE_CHARACTER_URL, {
+      const createPlayer = await fetch(API_CHARACTERS_URL, {
         headers: {
           "Content-Type": "application/json",
-          Authorization: "Bearer " + playerData.token,
+          Authorization: "Bearer " + playerData.theme,
           Accept: "application/json",
         },
         // mode: "cors",
@@ -77,14 +79,7 @@ export const usePlayer = () => {
 
   const getCharacters = async () => {
     try {
-      console.log("method called");
-      const caracterData = {
-        name: playerData.name,
-        email: playerData.email,
-        password: playerData.password,
-      };
-      console.log("data ==> ", caracterData);
-      const listCharacters = await fetch("", {
+      const listCharacters = await fetch(API_CHARACTERS_URL, {
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + playerData.token,
@@ -94,7 +89,7 @@ export const usePlayer = () => {
       });
       if (listCharacters.status === 200) {
         Notify("success", "Characters loaded!");
-        console.log("listing characters ", listCharacters);
+        console.log("listing characters ", listCharacters.body);
       } else {
         Notify("error", "Error loading characters");
         throw new Error(`Error loading characters`);

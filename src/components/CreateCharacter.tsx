@@ -5,7 +5,7 @@ import Stack from "@mui/material/Stack";
 import { usePlayer } from "../hooks/usePlayer";
 import { Container, Typography } from "@mui/material";
 
-export const CreateCharacter = () => {
+export const CreateCharacter = ({ type }: string) => {
   const {
     formData,
     handleAttributeChange,
@@ -22,7 +22,9 @@ export const CreateCharacter = () => {
       }}
     >
       <Typography gutterBottom variant="h6" component="div">
-        Don't have a character? Create your first one here!
+        {type === "editCharacter" && "Edit your character details"}
+        {type === "createCharacter" &&
+          "Don't have a character? Create your first one here!"}
       </Typography>
       <TextField
         label="Name"

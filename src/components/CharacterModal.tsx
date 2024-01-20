@@ -46,10 +46,10 @@ export const CharacterModal: React.FC<ModalProps> = ({
         <DialogContent
           sx={{
             overflowY: "auto",
-            maxHeight: "400px"
+            maxHeight: "400px",
           }}
         >
-          {type === "editCharacter" && <CreateCharacter />}
+          {type === "editCharacter" && <CreateCharacter type="editCharacter" />}
           <Typography variant="body1">
             Edit your character details here.
           </Typography>
