@@ -22,7 +22,7 @@ export const CharacterCard: React.FC = (key: index, characters: Characters) => {
   const { image, isEditModalOpen, handleEditModalClose, handleEditClick } =
     useCharacter();
 
-  const { getCharacters } = usePlayer()
+  const { getCharacters } = usePlayer();
   const state = useSelector((state: RootState) => state.player);
   console.log("state ==>", state);
 
@@ -91,14 +91,18 @@ export const CharacterCard: React.FC = (key: index, characters: Characters) => {
       <Button
         sx={{
           width: "100%",
-          background: 'green',
-          marginTop: 5
+          background: "green",
+          marginTop: 5,
         }}
         onClick={getCharacters}
       >
         Reload
       </Button>
-      <CharacterModal open={isEditModalOpen} onClose={handleEditModalClose} />
+      <CharacterModal
+        type="editCharacter"
+        open={isEditModalOpen}
+        onClose={handleEditModalClose}
+      />
     </Container>
   );
 };

@@ -10,15 +10,18 @@ import {
   DialogActions,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
+import { CreateCharacter } from "./CreateCharacter";
 
 interface ModalProps {
   open: boolean;
   onClose: () => void;
+  type: string;
 }
 
 export const CharacterModal: React.FC<ModalProps> = ({
   open,
   onClose,
+  type,
 }) => {
   return (
     <Modal open={open} onClose={onClose}>
@@ -28,7 +31,7 @@ export const CharacterModal: React.FC<ModalProps> = ({
           top: "50%",
           left: "50%",
           transform: "translate(-50%, -50%)",
-          width: '80%',
+          width: "80%",
           bgcolor: "background.paper",
           boxShadow: 24,
           p: 4,
@@ -40,9 +43,13 @@ export const CharacterModal: React.FC<ModalProps> = ({
             <CloseIcon />
           </IconButton>
         </Box>
-        <DialogContent>
-          {/* Add your form or content for editing character details */}
-          {/* For simplicity, let's just display a message */}
+        <DialogContent
+          sx={{
+            overflowY: "auto",
+            maxHeight: "400px"
+          }}
+        >
+          {type === "editCharacter" && <CreateCharacter />}
           <Typography variant="body1">
             Edit your character details here.
           </Typography>
