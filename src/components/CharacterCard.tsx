@@ -22,9 +22,8 @@ export const CharacterCard: React.FC = (key: index, characters: Characters) => {
   const { image, isEditModalOpen, handleEditModalClose, handleEditClick } =
     useCharacter();
 
-  const { getCharacters } = usePlayer();
+  const { GetCharacters } = usePlayer();
   const state = useSelector((state: RootState) => state.player);
-  console.log("state ==>", state);
 
   return (
     <Container sx={{ marginTop: 5, width: "100%" }}>
@@ -88,16 +87,6 @@ export const CharacterCard: React.FC = (key: index, characters: Characters) => {
           </Button>
         </CardActions>
       </Card>
-      <Button
-        sx={{
-          width: "100%",
-          background: "green",
-          marginTop: 5,
-        }}
-        onClick={getCharacters}
-      >
-        Reload
-      </Button>
       <CharacterModal
         type="editCharacter"
         open={isEditModalOpen}

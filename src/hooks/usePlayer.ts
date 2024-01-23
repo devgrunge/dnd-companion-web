@@ -1,12 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store";
 import { Notify } from "../helpers";
 import { API_CHARACTERS_URL } from "../.env/constants";
 import { setCharacter } from "../store/playerSlice/playerSlice";
+import io from "socket.io-client";
 
 export const usePlayer = () => {
   const [player, setPlayer] = useState({});
+  const [characterList, setCharactersList] = useState([]);
   const [formData, setFormData] = useState({
     name: "",
     level: 1,
@@ -24,6 +26,9 @@ export const usePlayer = () => {
     initiative: 0,
   });
 
+  // const socket = io("http://localhost:3338");
+
+  // console.log("my socket ==> ", socket);
   const playerData = useSelector((state: RootState) => state.player);
 
   const handleInputChange = (
@@ -77,27 +82,18 @@ export const usePlayer = () => {
     }
   };
 
-  const getCharacters = async () => {
-    try {
-      const listCharacters = await fetch(API_CHARACTERS_URL, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + playerData.token,
-          Accept: "application/json",
-        },
-        method: "GET",
+  const GetCharacters = () => {
+    const socket = io("http://localhost:3339");
+
+    useEffect(() => {
+      socket.on("receive_character_data", (data) => {
+        console.log(data);
+        setCharactersList(data);
       });
-      if (listCharacters.status === 200) {
-        Notify("success", "Characters loaded!");
-        console.log("listing characters ", listCharacters.body);
-      } else {
-        Notify("error", "Error loading characters");
-        throw new Error(`Error loading characters`);
-      }
-    } catch (error) {
-      Notify("error", "Error getting character(s) data");
-      throw new Error(`Internal server error": ${error}`);
-    }
+      return () => {
+        socket.disconnect();
+      };
+    }, [socket]);
   };
 
   const classesOptions = [
@@ -123,7 +119,7 @@ export const usePlayer = () => {
     setFormData,
     attributes,
     classesOptions,
-    getCharacters,
+    GetCharacters,
     setPlayer,
     player,
   };
