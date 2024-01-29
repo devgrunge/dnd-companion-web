@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "../store";
 import { Notify } from "../helpers";
 import { API_CHARACTERS_URL } from "../.env/constants";
@@ -26,9 +26,6 @@ export const usePlayer = () => {
     initiative: 0,
   });
 
-  // const socket = io("http://localhost:3338");
-
-  // console.log("my socket ==> ", socket);
   const playerData = useSelector((state: RootState) => state.player);
 
   const handleInputChange = (
@@ -60,7 +57,7 @@ export const usePlayer = () => {
       const createPlayer = await fetch(API_CHARACTERS_URL, {
         headers: {
           "Content-Type": "application/json",
-          Authorization: "Bearer " + playerData.theme,
+          Authorization: "Bearer " + playerData.token,
           Accept: "application/json",
         },
         // mode: "cors",
@@ -82,19 +79,20 @@ export const usePlayer = () => {
     }
   };
 
-  const GetCharacters = () => {
-    const socket = io("http://localhost:3339");
+  useEffect(() => {
+    const socket = io("http://localhost:3338/");
+    socket.emit("user_email", "teste@gmail");
 
-    useEffect(() => {
-      socket.on("receive_character_data", (data) => {
-        console.log(data);
-        setCharactersList(data);
-      });
-      return () => {
-        socket.disconnect();
-      };
-    }, [socket]);
-  };
+    socket.on("user_updated", (userObject) => {
+      console.log("Received updated user:", userObject);
+    
+      setPlayer(userObject);
+    });
+
+    return () => {
+      socket.disconnect();
+    };
+  }, [playerData.email, characterList]);
 
   const classesOptions = [
     "Warrior",
@@ -119,7 +117,7 @@ export const usePlayer = () => {
     setFormData,
     attributes,
     classesOptions,
-    GetCharacters,
+    characterList,
     setPlayer,
     player,
   };

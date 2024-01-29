@@ -22,7 +22,9 @@ export const CharacterCard: React.FC = (key: index, characters: Characters) => {
   const { image, isEditModalOpen, handleEditModalClose, handleEditClick } =
     useCharacter();
 
-  const { GetCharacters } = usePlayer();
+  const { characterList } = usePlayer()
+
+  console.log(characterList)
   const state = useSelector((state: RootState) => state.player);
 
   return (
