@@ -3,8 +3,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../store";
 import { Notify } from "../helpers";
 import { API_CHARACTERS_URL } from "../.env/constants";
-import { setCharacter } from "../store/playerSlice/playerSlice";
-import io from "socket.io-client";
+import { io } from "socket.io-client";
 
 export const usePlayer = () => {
   const [player, setPlayer] = useState({});
@@ -80,19 +79,47 @@ export const usePlayer = () => {
   };
 
   useEffect(() => {
-    const socket = io("http://localhost:3338/");
-    socket.emit("user_email", "teste@gmail");
-
-    socket.on("user_updated", (userObject) => {
-      console.log("Received updated user:", userObject);
-    
-      setPlayer(userObject);
+    const socket = io("ws://localhost:3338", { transports: ["websocket"] });
+  
+    socket.on("connect", () => {
+      console.log("Socket connected:", socket.id);
     });
-
+  
+    socket.on("message", (data) => {
+      console.log("Socket message received:", data);
+    });
+  
+    socket.on("error", (error) => {
+      console.error("Socket encountered an error:", error);
+  
+      switch (error.type) {
+        case "error":
+          console.error("General Socket error:", error.message || "No error message available.");
+          break;
+        default:
+          console.error("Unexpected Socket error type:", error.type);
+      }
+    });
+  
+    socket.on("disconnect", (reason) => {
+      console.log("Socket disconnected:", reason);
+  
+      if (reason === "io server disconnect") {
+        // Reconnect manually after 5 seconds
+        console.log("Retrying in 5 seconds...");
+        setTimeout(() => {
+          socket.connect();
+        }, 5000);
+      } else {
+        console.error("Socket connection abruptly closed");
+      }
+    });
+  
+    // Clean up the socket on component unmount
     return () => {
       socket.disconnect();
     };
-  }, [playerData.email, characterList]);
+  }, [playerData.email]);
 
   const classesOptions = [
     "Warrior",
