@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Button,
   Card,
@@ -12,22 +12,18 @@ import {
   Typography,
 } from "@mui/material";
 import { CharacterModal } from "./CharacterModal";
-import { Characters } from "../store/playerSlice/types/storeTypes";
 import { useCharacter } from "../hooks/useCharacter";
 import { useSelector } from "react-redux";
 import { RootState } from "../store";
 import { usePlayer } from "../hooks/usePlayer";
 
-export const CharacterCard: React.FC = (key: index, characters: Characters) => {
+export const CharacterCard: React.FC = () => {
   const { image, isEditModalOpen, handleEditModalClose, handleEditClick } =
     useCharacter();
 
   const { characterList } = usePlayer();
 
-  console.log(characterList);
-  const state = useSelector((state: RootState) => state.player);
-
-  return (
+  return characterList.data?.length > 0 ? (
     <Container sx={{ marginTop: 5, width: "100%" }}>
       <Card sx={{ maxWidth: "100%" }}>
         <CardActionArea>
@@ -42,43 +38,20 @@ export const CharacterCard: React.FC = (key: index, characters: Characters) => {
               John doe
             </Typography>
             <Grid container spacing={2} columns={{ xs: 12, sm: 12, md: 12 }}>
-              {/* {Array.from(Array(6)).map((_, index) => (
+              {characterList.data.map((item, index) => (
                 <Grid item xs={2} sm={2} md={2} key={index}>
-                  <Typography variant="body1">
-                    {["Str", "Dex", "Con", "Int", "Wis", "Car"][index]}
-                  </Typography>
-                  <Typography variant="h6">
-                    {Math.floor(Math.random() * 20) + 1}
-                  </Typography>
+                  <Typography variant="body1">Attributes:</Typography>
+                  {["Str", "Dex", "Con", "Int", "Wis", "Car"].map(
+                    (attribute) => (
+                      <Typography key={attribute} variant="body1">
+                        {`${attribute}: ${
+                          item.attributes[attribute.toLowerCase()]
+                        }`}
+                      </Typography>
+                    )
+                  )}
                 </Grid>
-              ))} */}
-              {state.characters.map((item, index) => {
-                return (
-                  <Grid item xs={2} sm={2} md={2} key={index}>
-                    <Typography variant="body1">
-                      {["Str", "Dex", "Con", "Int", "Wis", "Car"]}
-                    </Typography>
-                    {/* <Typography variant="body1">
-                      {item.attributes.str}
-                    </Typography>
-                    <Typography variant="body1">
-                      {item.attributes.str}
-                    </Typography>
-                    <Typography variant="body1">
-                      {item.attributes.str}
-                    </Typography>
-                    <Typography variant="body1">
-                      {item.attributes.str}
-                    </Typography>
-                    <Typography variant="body1">
-                      {item.attributes.str}
-                    </Typography>
-                    <Typography variant="body1">
-                      {item.attributes.str}
-                    </Typography> */}
-                  </Grid>
-                );
-              })}
+              ))}
             </Grid>
             <Divider sx={{ width: "100%", marginTop: 2, marginBottom: 2 }} />
           </CardContent>
@@ -95,5 +68,9 @@ export const CharacterCard: React.FC = (key: index, characters: Characters) => {
         onClose={handleEditModalClose}
       />
     </Container>
+  ) : (
+    <>
+      <Typography>No characters yet</Typography>
+    </>
   );
 };
