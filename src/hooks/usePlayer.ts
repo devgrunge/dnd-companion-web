@@ -4,8 +4,9 @@ import { RootState } from "../store";
 import { Notify } from "../helpers";
 import { API_CHARACTERS_URL } from "../.env/constants";
 import { Socket, io } from "socket.io-client";
+import { PlayerHookResult } from "./types/useLoginTypes";
 
-export const usePlayer = () => {
+export const usePlayer = (): PlayerHookResult => {
   const [player, setPlayer] = useState({});
   const [characterList, setCharactersList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
