@@ -8,6 +8,7 @@ import { Socket, io } from "socket.io-client";
 export const usePlayer = () => {
   const [player, setPlayer] = useState({});
   const [characterList, setCharactersList] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [formData, setFormData] = useState({
     name: "",
     level: 1,
@@ -81,6 +82,7 @@ export const usePlayer = () => {
   const setupSocket = (socket: Socket, email: string | undefined) => {
     socket.on("connect", () => {
       console.log("Socket connected:", socket.id);
+      setIsLoading(false);
     });
 
     socket.emit("fetch_character_data", email);
@@ -114,6 +116,7 @@ export const usePlayer = () => {
       if (reason === "io server disconnect") {
         console.log("Retrying in 5 seconds...");
         Notify("error", "Loose connection, retrying...");
+        setIsLoading(false);
         setTimeout(() => {
           socket.connect();
         }, 5000);
@@ -161,5 +164,6 @@ export const usePlayer = () => {
     characterList,
     setPlayer,
     player,
+    isLoading,
   };
 };
