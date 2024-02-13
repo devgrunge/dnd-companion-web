@@ -46,7 +46,6 @@ export const CharacterCard: React.FC = () => {
                   columns={{ xs: 12, sm: 12, md: 12 }}
                 >
                   <Grid item xs={12} sm={12} md={12}>
-                    <Typography variant="body1">Attributes:</Typography>
                     <Typography variant="body1">
                       {["Str", "Dex", "Con", "Int", "Wis", "Car"]
                         .map(

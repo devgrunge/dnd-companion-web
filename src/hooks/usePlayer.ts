@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store";
 import { Notify } from "../helpers";
 import { API_CHARACTERS_URL } from "../.env/constants";
 import { Socket, io } from "socket.io-client";
 import { PlayerHookResult } from "./types/useLoginTypes";
+import { setCharacter } from "../store/playerSlice/playerSlice";
 
 export const usePlayer = (): PlayerHookResult => {
+  const dispatch = useDispatch();
   const [player, setPlayer] = useState({});
   const [characterList, setCharactersList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -68,8 +70,7 @@ export const usePlayer = (): PlayerHookResult => {
       const responseData = await createPlayer.json();
       if (createPlayer.status === 201) {
         Notify("success", "Character created successfully");
-        console.log("response data ==> ", responseData);
-        // dispatch(setCharacter(responseData.created));
+        dispatch(setCharacter(responseData.created));
       } else {
         Notify("error", "Error while creating character");
         throw new Error(`Error creating character`);
@@ -83,7 +84,6 @@ export const usePlayer = (): PlayerHookResult => {
   const setupSocket = (socket: Socket, email: string | undefined) => {
     socket.on("connect", () => {
       console.log("Socket connected:", socket.id);
-      setIsLoading(false);
     });
 
     socket.emit("fetch_character_data", email);
@@ -94,6 +94,7 @@ export const usePlayer = (): PlayerHookResult => {
       }
 
       setCharactersList(data);
+      setIsLoading(false);
     });
 
     socket.on("error", (error) => {
@@ -137,7 +138,7 @@ export const usePlayer = (): PlayerHookResult => {
     return () => {
       socket.disconnect();
     };
-  }, [playerData.email]);
+  }, [playerData.email, isLoading]);
 
   const classesOptions = [
     "Warrior",

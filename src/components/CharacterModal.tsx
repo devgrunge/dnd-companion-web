@@ -50,9 +50,6 @@ export const CharacterModal: React.FC<ModalProps> = ({
           }}
         >
           {type === "editCharacter" && <CreateCharacter type="editCharacter" />}
-          <Typography variant="body1">
-            Edit your character details here.
-          </Typography>
         </DialogContent>
         <DialogActions>
           <Button onClick={onClose} color="primary">
