@@ -1,5 +1,3 @@
-import * as React from "react";
-import CssBaseline from "@mui/material/CssBaseline";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -14,6 +12,7 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useLogin } from "../hooks/useLogin";
 import { Copyright } from "./Copyright";
+import { CssBaseline } from "@mui/material";
 
 const defaultTheme = createTheme();
 

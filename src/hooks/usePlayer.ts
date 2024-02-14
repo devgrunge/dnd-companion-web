@@ -140,6 +140,32 @@ export const usePlayer = (): PlayerHookResult => {
     };
   }, [playerData.email, isLoading]);
 
+  // useEffect(() => {
+  //   const eventSource = new EventSource("http://localhost:3338/fetch-character-list");
+
+  //   eventSource.addEventListener("character_data", (event: MessageEvent) => {
+  //     const characterData = JSON.parse(event.data);
+  //     setCharactersList(characterData.data);
+  //     setIsLoading(false);
+  //   });
+
+  //   eventSource.addEventListener("connected", (event: MessageEvent) => {
+  //     // Handle connection event if needed
+  //     console.log(event.data);
+  //   });
+
+  //   eventSource.onerror = (error) => {
+  //     // Handle errors
+  //     console.error("Error with SSE:", error);
+  //     setIsLoading(false);
+  //     eventSource.close();
+  //   };
+
+  //   return () => {
+  //     eventSource.close();
+  //   };
+  // }, [playerData.email, isLoading]);
+
   const classesOptions = [
     "Warrior",
     "Mage",

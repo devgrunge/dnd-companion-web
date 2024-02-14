@@ -3,16 +3,33 @@ import { SpeedDial, SpeedDialAction, SpeedDialIcon } from "@mui/material";
 import AddReactionIcon from "@mui/icons-material/AddReaction";
 import ShareIcon from "@mui/icons-material/Share";
 import SettingsIcon from "@mui/icons-material/Settings";
-import { usePlayer } from "../hooks/usePlayer";
+import { useMenu } from "../hooks/useMenu";
 
 export const PlayerActions = () => {
   const actions = [
-    { icon: <AddReactionIcon />, name: "Characters" },
-    { icon: <SettingsIcon />, name: "Configurations" },
-    { icon: <ShareIcon />, name: "Share" },
+    {
+      icon: <AddReactionIcon />,
+      name: "Characters",
+      actionHandler: "handleOpenCharactersModal",
+    },
+    {
+      icon: <SettingsIcon />,
+      name: "Configurations",
+      actionHandler: "handleOpenConfigurationsModal",
+    },
+    {
+      icon: <ShareIcon />,
+      name: "Share",
+      actionHandler: "handleOpenShareModal",
+    },
   ];
 
-  // const {  } = usePlayer()
+  const {
+    charactersModalOpen,
+    configurationsModalOpen,
+    shareModalOpen,
+    ...menuFunctions
+  } = useMenu();
 
   return (
     <SpeedDial
@@ -26,7 +43,10 @@ export const PlayerActions = () => {
           icon={action.icon}
           tooltipTitle={action.name}
           tooltipOpen
-          // onClick={}
+          onClick={() => {
+            menuFunctions[action.actionHandler]();
+            console.log(`Executing action: ${action.name}`);
+          }}
         />
       ))}
     </SpeedDial>
