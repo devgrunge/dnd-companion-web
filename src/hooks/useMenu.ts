@@ -1,29 +1,27 @@
 import { useState } from "react";
+import { useModal } from "../contexts/modalContext";
 
-export const useMenu = () => {
-  const [charactersModalOpen, setCharactersModalOpen] = useState(false);
-  const [configurationsModalOpen, setConfigurationsModalOpen] = useState(false);
-  const [shareModalOpen, setShareModalOpen] = useState(false);
+interface MenuFunctions {
+  handleOpenCharactersModal: () => void;
+  handleOpenConfigurationsModal: () => void;
+  handleOpenShareModal: () => void;
+}
 
+export const useMenu = (): MenuFunctions => {
+  const { openModal, closeModal } = useModal();
   const handleOpenCharactersModal = () => {
-    console.log("Opening Characters Modal");
-    setCharactersModalOpen(true);
+    openModal("character");
   };
 
   const handleOpenConfigurationsModal = () => {
-    console.log("Opening Configurations Modal");
-    setConfigurationsModalOpen(true);
+    openModal("config");
   };
 
   const handleOpenShareModal = () => {
-    console.log("Opening Share Modal");
-    setShareModalOpen(true);
+    openModal("share");
   };
 
   return {
-    charactersModalOpen,
-    configurationsModalOpen,
-    shareModalOpen,
     handleOpenCharactersModal,
     handleOpenConfigurationsModal,
     handleOpenShareModal,

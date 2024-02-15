@@ -5,8 +5,14 @@ import ShareIcon from "@mui/icons-material/Share";
 import SettingsIcon from "@mui/icons-material/Settings";
 import { useMenu } from "../hooks/useMenu";
 
+interface Action {
+  icon: JSX.Element;
+  name: string;
+  actionHandler: keyof ReturnType<typeof useMenu>;
+}
+
 export const PlayerActions = () => {
-  const actions = [
+  const actions: Action[] = [
     {
       icon: <AddReactionIcon />,
       name: "Characters",
@@ -24,12 +30,7 @@ export const PlayerActions = () => {
     },
   ];
 
-  const {
-    charactersModalOpen,
-    configurationsModalOpen,
-    shareModalOpen,
-    ...menuFunctions
-  } = useMenu();
+  const { ...menuFunctions } = useMenu() as ReturnType<typeof useMenu>;
 
   return (
     <SpeedDial

@@ -10,6 +10,7 @@ import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
+import { ModalProvider } from "../contexts/modalContext.tsx";
 
 export const App = () => {
   return (
@@ -17,7 +18,9 @@ export const App = () => {
       <Provider store={store}>
         <CssBaseline />
         <ToastContainer />
-        <RouterProvider router={router} />
+        <ModalProvider>
+          <RouterProvider router={router} />
+        </ModalProvider>
       </Provider>
     </React.Fragment>
   );
