@@ -3,9 +3,9 @@ import Autocomplete from "@mui/material/Autocomplete";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import { usePlayer } from "../hooks/usePlayer";
-import { Container, Typography } from "@mui/material";
+import { Container } from "@mui/material";
 
-export const CreateCharacter = (type: string) => {
+export const CreateCharacter = () => {
   const {
     formData,
     handleAttributeChange,
@@ -21,11 +21,6 @@ export const CreateCharacter = (type: string) => {
         maxWidth: "100%",
       }}
     >
-      <Typography gutterBottom variant="h6" component="div">
-        {type === "editCharacter" && "Edit your character details"}
-        {type === "createCharacter" &&
-          "Don't have a character? Create your first one here!"}
-      </Typography>
       <TextField
         label="Name"
         variant="outlined"

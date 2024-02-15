@@ -1,9 +1,11 @@
 import React from "react";
-import { CharacterCard } from "./CharacterCard";
+import { Typography } from "@mui/material";
 
 export const RoomsBoard: React.FC = () => {
-
   return (
-  <CharacterCard />
+    <Typography>
+      Don't have a room yet? Create one or Join at a existent one
+    </Typography>
+    // <CharacterCard />
   );
 };

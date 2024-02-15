@@ -27,8 +27,8 @@ export const CharacterCard: React.FC = () => {
       {isLoading ? (
         <SkeletonCard />
       ) : (
-        characterList.data?.map((item, index) => (
-          <Card key={index} sx={{ maxWidth: "100%" }}>
+        characterList.data?.map((item, characterIndex: number) => (
+          <Card key={characterIndex} sx={{ maxWidth: "100%" }}>
             <CardActionArea>
               <CardMedia
                 component="img"

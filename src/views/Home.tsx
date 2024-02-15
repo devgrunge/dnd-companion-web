@@ -44,8 +44,6 @@ export const Home = () => {
   const theme = useTheme();
   const [value, setValue] = useState(0);
 
-  const modalType = "createCharacter"
-
   const handleChange = (event: unknown, newValue: number) => {
     setValue(newValue);
   };
@@ -127,11 +125,9 @@ export const Home = () => {
         {value === 0 && (
           <>
             {playerData.characters.length === 0 ? (
-              <CreateCharacter type={modalType} />
+              <CreateCharacter />
             ) : (
-              playerData.characters.map((character, index) => (
-                <CharacterCard key={index} character={character} />
-              ))
+              playerData.characters.map((character, index) => <CharacterCard key={index} />)
             )}
           </>
         )}

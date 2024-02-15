@@ -34,7 +34,7 @@ export const PlayerActions = () => {
 
   return (
     <SpeedDial
-      ariaLabel="SpeedDial openIcon example"
+      ariaLabel="User actions"
       sx={{ position: "absolute", bottom: "2%", right: "2%" }}
       icon={<SpeedDialIcon openIcon={<EditNotifications />} />}
     >
