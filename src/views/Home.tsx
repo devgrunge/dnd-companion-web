@@ -56,8 +56,8 @@ export const Home = () => {
   const fabs = [
     {
       color: "primary" as const,
-      sx: fabStyle as SxProps,
-      icon: <PlayerActions />,
+      // how define custom style? sx: fabStyle as SxProps,
+      icon: <PlayerActions/>,
       label: "Add",
     },
     {
@@ -127,7 +127,9 @@ export const Home = () => {
             {playerData.characters.length === 0 ? (
               <CreateCharacter />
             ) : (
-              playerData.characters.map((character, index) => <CharacterCard key={index} />)
+              playerData.characters.map((character, index) => (
+                <CharacterCard key={index} />
+              ))
             )}
           </>
         )}
