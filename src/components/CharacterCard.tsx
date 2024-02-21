@@ -11,14 +11,15 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
-import { CharacterModal } from "./CharacterModal";
 import { useCharacter } from "../hooks/useCharacter";
 import { usePlayer } from "../hooks/usePlayer";
 import { SkeletonCard } from "./skeletons/SkeletonCard";
+import { ModalContainer } from "../contexts/ModalContainer";
+import { useModal } from "../contexts/modalContext";
 
 export const CharacterCard: React.FC = () => {
-  const { image, isEditModalOpen, handleEditModalClose, handleEditClick } =
-    useCharacter();
+  const { image } = useCharacter();
+  const { openModal } = useModal();
 
   const { characterList, isLoading } = usePlayer();
 
@@ -28,7 +29,10 @@ export const CharacterCard: React.FC = () => {
         <SkeletonCard />
       ) : (
         characterList.data?.map((item, characterIndex: number) => (
-          <Card key={characterIndex} sx={{ maxWidth: "100%" }}>
+          <Card
+            key={characterIndex}
+            sx={{ maxWidth: "100%", marginTop: 5, marginBottom: 5 }}
+          >
             <CardActionArea>
               <CardMedia
                 component="img"
@@ -64,18 +68,18 @@ export const CharacterCard: React.FC = () => {
               </CardContent>
             </CardActionArea>
             <CardActions>
-              <Button size="small" color="primary" onClick={handleEditClick}>
+              <Button
+                size="small"
+                color="primary"
+                onClick={() => openModal("character")}
+              >
                 Edit Character
               </Button>
             </CardActions>
           </Card>
         ))
       )}
-      <CharacterModal
-        type="editCharacter"
-        open={isEditModalOpen}
-        onClose={handleEditModalClose}
-      />
+      <ModalContainer />
     </Container>
   );
 };

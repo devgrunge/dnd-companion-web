@@ -12,7 +12,7 @@ interface Action {
   sx?: SxProps;
 }
 
-export const PlayerActions : React.FC<Action> ({ sx }) => {
+export const PlayerActions : React.FC<Action> = ({ sx }) => {
   const actions: Action[] = [
     {
       icon: <AddReactionIcon />,

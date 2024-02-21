@@ -57,7 +57,7 @@ export const Home = () => {
     {
       color: "primary" as const,
       // how define custom style? sx: fabStyle as SxProps,
-      icon: <PlayerActions/>,
+      icon: <EditIcon />,
       label: "Add",
     },
     {
@@ -116,9 +116,14 @@ export const Home = () => {
             }}
             unmountOnExit
           >
-            <Fab sx={fab.sx} aria-label={fab.label} color={fab.color}>
-              {fab.icon}
-            </Fab>
+            {value === 0 && fab.color === "primary" ? (
+              <PlayerActions />
+            ) : (
+              // Render the regular FAB on other screens
+              <Fab sx={fab.sx} aria-label={fab.label} color={fab.color}>
+                {fab.icon}
+              </Fab>
+            )}
           </Zoom>
         ))}
 
