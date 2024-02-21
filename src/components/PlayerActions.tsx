@@ -1,35 +1,44 @@
 import { EditNotifications } from "@mui/icons-material";
-import { SpeedDial, SpeedDialAction, SpeedDialIcon, SxProps } from "@mui/material";
+import {
+  SpeedDial,
+  SpeedDialAction,
+  SpeedDialIcon,
+  SxProps,
+} from "@mui/material";
 import AddReactionIcon from "@mui/icons-material/AddReaction";
 import ShareIcon from "@mui/icons-material/Share";
 import SettingsIcon from "@mui/icons-material/Settings";
 import { useMenu } from "../hooks/useMenu";
 
-interface Action {
+export interface Action {
   icon: JSX.Element;
   name: string;
   actionHandler: keyof ReturnType<typeof useMenu>;
   sx?: SxProps;
 }
 
-export const PlayerActions : React.FC<Action> = ({ sx }) => {
-  const actions: Action[] = [
-    {
-      icon: <AddReactionIcon />,
-      name: "Characters",
-      actionHandler: "handleOpenCharactersModal",
-    },
-    {
-      icon: <SettingsIcon />,
-      name: "Configurations",
-      actionHandler: "handleOpenConfigurationsModal",
-    },
-    {
-      icon: <ShareIcon />,
-      name: "Share",
-      actionHandler: "handleOpenShareModal",
-    },
-  ];
+interface PlayerActionsProps {
+  actions: Action[];
+}
+
+export const PlayerActions: React.FC<PlayerActionsProps> = ({ actions }) => {
+  //  const actions: Action[] = [
+  //   {
+  //     icon: <AddReactionIcon />,
+  //     name: "Characters",
+  //     actionHandler: "handleOpenCharactersModal",
+  //   },
+  //   {
+  //     icon: <SettingsIcon />,
+  //     name: "Configurations",
+  //     actionHandler: "handleOpenConfigurationsModal",
+  //   },
+  //   {
+  //     icon: <ShareIcon />,
+  //     name: "Share",
+  //     actionHandler: "handleOpenShareModal",
+  //   },
+  // ];
 
   const { ...menuFunctions } = useMenu() as ReturnType<typeof useMenu>;
 
@@ -37,11 +46,7 @@ export const PlayerActions : React.FC<Action> = ({ sx }) => {
     <SpeedDial
       ariaLabel="User actions"
       sx={{ position: "fixed", bottom: "5%", right: "5%" }}
-      icon={
-        <SpeedDialIcon
-          openIcon={<EditNotifications sx={{ backgroundColor: "black" }} />}
-        />
-      }
+      icon={<SpeedDialIcon openIcon={<EditNotifications />} />}
     >
       {actions.map((action) => (
         <SpeedDialAction

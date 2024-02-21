@@ -10,14 +10,25 @@ import UpIcon from "@mui/icons-material/KeyboardArrowUp";
 import Box from "@mui/material/Box";
 import { green } from "@mui/material/colors";
 import { SxProps } from "@mui/system";
-import { Container } from "@mui/material";
+import {
+  Container,
+  Duration,
+  SpeedDial,
+  SpeedDialAction,
+  SpeedDialIcon,
+} from "@mui/material";
 import { CoffeTab } from "../components/BuyMeACoffe";
 import { RoomsBoard } from "../components/Rooms";
 import { CharacterCard } from "../components/CharacterCard";
-import { PlayerActions } from "../components/PlayerActions";
+import { Action, PlayerActions } from "../components/PlayerActions";
 import { useSelector } from "react-redux";
 import { RootState } from "../store";
 import { CreateCharacter } from "../components/CreateCharacter";
+import { EditNotifications } from "@mui/icons-material";
+import { useMenu } from "../hooks/useMenu";
+import AddReactionIcon from "@mui/icons-material/AddReaction";
+import ShareIcon from "@mui/icons-material/Share";
+import SettingsIcon from "@mui/icons-material/Settings";
 
 const a11yProps = (index: number) => {
   return {
@@ -53,11 +64,30 @@ export const Home = () => {
     exit: theme.transitions.duration.leavingScreen,
   };
 
+  const actions: Action[] = [
+    {
+      icon: <AddReactionIcon />,
+      name: "Characters",
+      actionHandler: "handleOpenCharactersModal",
+    },
+    {
+      icon: <SettingsIcon />,
+      name: "Configurations",
+      actionHandler: "handleOpenConfigurationsModal",
+    },
+    {
+      icon: <ShareIcon />,
+      name: "Share",
+      actionHandler: "handleOpenShareModal",
+    },
+  ];
+
+  const { ...menuFunctions } = useMenu() as ReturnType<typeof useMenu>;
+
   const fabs = [
     {
       color: "primary" as const,
-      // how define custom style? sx: fabStyle as SxProps,
-      icon: <EditIcon />,
+      icon: <PlayerActions actions={actions} />,
       label: "Add",
     },
     {
@@ -117,9 +147,31 @@ export const Home = () => {
             unmountOnExit
           >
             {value === 0 && fab.color === "primary" ? (
-              <PlayerActions />
+              <SpeedDial
+                ariaLabel="User actions"
+                sx={{ position: "fixed", bottom: "5%", right: "5%" }}
+                icon={
+                  <SpeedDialIcon
+                    openIcon={
+                      <EditNotifications sx={{ backgroundColor: "black" }} />
+                    }
+                  />
+                }
+              >
+                {actions.map((action) => (
+                  <SpeedDialAction
+                    key={action.name}
+                    icon={action.icon}
+                    tooltipTitle={action.name}
+                    tooltipOpen
+                    onClick={() => {
+                      menuFunctions[action.actionHandler]();
+                      console.log(`Executing action: ${action.name}`);
+                    }}
+                  />
+                ))}
+              </SpeedDial>
             ) : (
-              // Render the regular FAB on other screens
               <Fab sx={fab.sx} aria-label={fab.label} color={fab.color}>
                 {fab.icon}
               </Fab>
